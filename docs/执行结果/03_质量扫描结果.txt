@@ -1,0 +1,49 @@
+total	age_null_cnt	email_null_cnt
+1000	44	86
+total	launch_date_null_cnt
+600	38
+total	pay_amount_null_cnt	pay_amount_neg_cnt
+15600	461	304
+dup_order_id_cnt
+585
+fully_duplicated_rows
+295
+dup_user_id_cnt
+0
+dup_product_id_cnt
+0
+pay_type	cnt
+wxpay	6992
+alipay	5480
+cash	1886
+card	1242
+order_status	cnt
+done	6211
+paid	3855
+shipped	2981
+pending	1496
+cancelled	1057
+gender	cnt
+	7
+F	22
+M	15
+女	455
+男	501
+action	cnt
+buy	5402
+cart	10926
+fav	4788
+view	38884
+bad_date_cnt
+0
+bad_phone_cnt
+24
+city	province	cnt
+bad_age_cnt
+30
+neg_pay_cnt
+304
+discount_exceed_cnt
+755
+future_order_cnt
+0

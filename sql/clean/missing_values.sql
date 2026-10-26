@@ -33,7 +33,7 @@ SELECT
     user_name,
     gender,
     CASE
-        WHEN age IS NULL OR age='' OR age < 1 OR age > 120 THEN 35   -- TODO: 替换为实际均值
+        WHEN age IS NULL OR age='' OR age < 1 OR age > 120 THEN 44   -- 实测均值：ROUND(AVG(age),0)=44（合理区间 1~120）
         ELSE age
     END AS age,
     city,

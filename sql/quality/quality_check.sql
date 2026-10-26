@@ -21,9 +21,11 @@ SELECT COUNT(*) AS total,
        SUM(CASE WHEN launch_date IS NULL OR launch_date='' THEN 1 ELSE 0 END) AS launch_date_null_cnt
 FROM ods_product;
 
--- 1.3 订单表：支付金额空值/空串
+-- 1.3 订单表：支付金额空值/为负
+-- 注：pay_amount 为 DECIMAL，CSV 空串载入后即为 NULL，不要与 '' 比较
 SELECT COUNT(*) AS total,
-       SUM(CASE WHEN pay_amount IS NULL OR pay_amount='' THEN 1 ELSE 0 END) AS pay_amount_null_cnt
+       SUM(CASE WHEN pay_amount IS NULL THEN 1 ELSE 0 END) AS pay_amount_null_cnt,
+       SUM(CASE WHEN pay_amount < 0 THEN 1 ELSE 0 END)     AS pay_amount_neg_cnt
 FROM ods_order;
 
 -- ============================================================

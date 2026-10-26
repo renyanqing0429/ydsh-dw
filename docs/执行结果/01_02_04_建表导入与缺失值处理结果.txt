@@ -1,0 +1,32 @@
+01_建表结果（2026-10-26，beeline 实际执行 create_ods.sql）
+============================================================
+CREATE DATABASE ydsh_ods → OK
+SHOW TABLES IN ydsh_ods:
+  ods_user / ods_product / ods_store / ods_order / ods_order_item / ods_user_behavior
+共 6 张表全部建成，字段类型与列注释见 create_ods.sql。
+（注：中文注释因 JDBC 连接字符集显示为 ?，不影响数据与结构）
+
+02_导入结果（2026-10-26，beeline 实际执行 load_data.sql）
+============================================================
+LOAD DATA 6 张 CSV → OK
+行数校验（与《部署操作手册》预期完全一致）：
+  ods_user            1000   ✅
+  ods_product          600   ✅
+  ods_store             60   ✅
+  ods_order         15600   ✅
+  ods_order_item    37549   ✅
+  ods_user_behavior 60000   ✅
+抽样：中文正常显示；脏数据可见（如 pay_amount=-63.63 的负值订单）。
+
+04_缺失值处理结果（2026-10-26，beeline 实际执行 missing_values.sql）
+============================================================
+诊断：
+  age 缺失或非法（空/负/超120）：74
+  email 缺失：86
+  phone 缺失：7（另有格式异常见质量扫描）
+  launch_date 缺失：38
+年龄均值：ROUND(AVG(age),0) = 44（合理区间 1~120）
+处理：
+  dwd_user    1000 行，bad_age_left = 0 ✅（44 填充）
+  dwd_product  600 行，bad_launch_date_left = 0 ✅（类目最早上架日期补全）
+  dwd_user.is_email_missing 标记 86 条保留空值
