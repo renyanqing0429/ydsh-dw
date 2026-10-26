@@ -55,6 +55,7 @@ services:
       - "10002:10002"
     volumes:
       - ./data:/data
+      - ./sql:/sql
 
 volumes:
   mysql_data:
