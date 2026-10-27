@@ -19,3 +19,6 @@ node_modules/
 # IDE
 .idea/
 .vscode/
+
+# SSH 私钥（严禁提交）
+.ssh-key/
