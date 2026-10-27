@@ -55,15 +55,15 @@ SELECT COUNT(*) AS dup_product_id_cnt
 FROM (SELECT product_id FROM ods_product GROUP BY product_id HAVING COUNT(*) > 1) t;
 
 -- ============================================================
--- 三、有效性：枚举取值合法性
--- 合法值示例（以数据字典为准）：pay_type: wxpay/alipay/cash/card
---                              order_status: pending/paid/shipped/done/cancelled
+-- 三、有效性：枚举取值合法性（先 GROUP BY 看全量取值分布，再对照数据字典判断非法值）
 -- ============================================================
 
 SELECT pay_type, COUNT(*) AS cnt FROM ods_order GROUP BY pay_type ORDER BY cnt DESC;
 SELECT order_status, COUNT(*) AS cnt FROM ods_order GROUP BY order_status ORDER BY cnt DESC;
+SELECT channel, COUNT(*) AS cnt FROM ods_order GROUP BY channel ORDER BY cnt DESC;
 SELECT gender, COUNT(*) AS cnt FROM ods_user GROUP BY gender;
-SELECT action, COUNT(*) AS cnt FROM ods_user_behavior GROUP BY action;
+SELECT status, COUNT(*) AS cnt FROM ods_product GROUP BY status;
+SELECT behavior_type, COUNT(*) AS cnt FROM ods_user_behavior GROUP BY behavior_type;
 
 -- ============================================================
 -- 四、一致性：格式是否统一（日期、手机号、省份等）

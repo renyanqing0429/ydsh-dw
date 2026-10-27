@@ -34,9 +34,12 @@ CREATE TABLE IF NOT EXISTS ods_product (
     product_id    STRING          COMMENT '商品ID',
     product_name  STRING          COMMENT '商品名称',
     category      STRING          COMMENT '商品类目',
+    sub_category  STRING          COMMENT '子类目',
+    brand         STRING          COMMENT '品牌',
     price         DECIMAL(10,2)   COMMENT '售价（可能空/负）',
+    cost          DECIMAL(10,2)   COMMENT '成本价',
     stock         INT             COMMENT '库存',
-    status        STRING          COMMENT '商品状态（枚举校验点）',
+    status        STRING          COMMENT '商品状态（在售/下架/缺货，含非法值）',
     launch_date   STRING          COMMENT '上架日期（可能缺失）'
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
@@ -45,12 +48,15 @@ TBLPROPERTIES ('skip.header.line.count'='1');
 
 -- 3. 门店表 --------------------------------------------------
 CREATE TABLE IF NOT EXISTS ods_store (
-    store_id    STRING COMMENT '门店ID',
-    store_name  STRING COMMENT '门店名称',
-    city        STRING COMMENT '城市',
-    province    STRING COMMENT '省份',
-    open_date   STRING COMMENT '开业日期',
-    store_type  STRING COMMENT '门店类型'
+    store_id    STRING          COMMENT '门店ID',
+    store_name  STRING          COMMENT '门店名称',
+    province    STRING          COMMENT '省份',
+    city        STRING          COMMENT '城市',
+    district    STRING          COMMENT '区县',
+    address     STRING          COMMENT '详细地址',
+    open_date   STRING          COMMENT '开业日期',
+    area        DECIMAL(10,2)   COMMENT '门店面积（平方米）',
+    manager     STRING          COMMENT '店长'
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
@@ -80,7 +86,7 @@ CREATE TABLE IF NOT EXISTS ods_order_item (
     product_id  STRING         COMMENT '商品ID',
     quantity    INT            COMMENT '购买数量',
     unit_price  DECIMAL(10,2)  COMMENT '单价',
-    amount      DECIMAL(10,2)  COMMENT '小计金额'
+    discount    DECIMAL(5,2)   COMMENT '折扣率（如 0.12）'
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
@@ -88,11 +94,12 @@ TBLPROPERTIES ('skip.header.line.count'='1');
 
 -- 6. 用户行为表 ----------------------------------------------
 CREATE TABLE IF NOT EXISTS ods_user_behavior (
-    behavior_id  STRING COMMENT '行为ID',
-    user_id      STRING COMMENT '用户ID',
-    product_id   STRING COMMENT '商品ID',
-    action       STRING COMMENT '行为类型（view/cart/buy/fav 枚举校验点）',
-    action_time  STRING COMMENT '行为时间'
+    behavior_id    STRING COMMENT '行为ID',
+    user_id        STRING COMMENT '用户ID',
+    product_id     STRING COMMENT '商品ID',
+    behavior_type  STRING COMMENT '行为类型（buy/view/加购/收藏等，中英混合，枚举校验点）',
+    behavior_time  STRING COMMENT '行为时间 yyyy-MM-dd HH:mm:ss',
+    session_id     STRING COMMENT '会话ID'
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
