@@ -1,49 +1,79 @@
 total	age_null_cnt	email_null_cnt
-1000	44	86
+1000	51	193
 total	launch_date_null_cnt
-600	38
+600	11
 total	pay_amount_null_cnt	pay_amount_neg_cnt
-15600	461	304
+15600	0	310
 dup_order_id_cnt
-585
+586
 fully_duplicated_rows
-295
+394
 dup_user_id_cnt
 0
 dup_product_id_cnt
 0
 pay_type	cnt
-wxpay	6992
-alipay	5480
-cash	1886
-card	1242
+支付宝	3944
+微信支付	3711
+货到付款	3693
+银行卡	3601
+wechat	227
+微信	218
+alipay	206
 order_status	cnt
-done	6211
-paid	3855
-shipped	2981
-pending	1496
-cancelled	1057
+已完成	5498
+已支付	4102
+待支付	1990
+已取消	1800
+退款中	835
+1	211
+3	202
+cancelled	198
+已付款	197
+2	193
+完成	192
+4	182
+channel	cnt
+门店	3862
+APP	3854
+小程序	3845
+PC官网	3729
+app	170
+pc	140
 gender	cnt
-	7
-F	22
-M	15
-女	455
-男	501
-action	cnt
-buy	5402
-cart	10926
-fav	4788
-view	38884
+	84
+F	109
+M	87
+female	108
+male	110
+女	212
+未知	108
+男	182
+status	cnt
+下架	53
+在售	510
+缺货	37
+behavior_type	cnt
+Cart	619
+PV	604
+buy	11393
+cart	7021
+fav	4969
+pv	32945
+加购	646
+收藏	616
+浏览	611
+购买	576
 bad_date_cnt
-0
+1902
 bad_phone_cnt
-24
+102
 city	province	cnt
 bad_age_cnt
-30
+27
 neg_pay_cnt
-304
+310
 discount_exceed_cnt
-755
+324
 future_order_cnt
 0

@@ -33,7 +33,7 @@ SELECT
     user_name,
     gender,
     CASE
-        WHEN age IS NULL OR age='' OR age < 1 OR age > 120 THEN 44   -- 实测均值：ROUND(AVG(age),0)=44（合理区间 1~120）
+        WHEN age IS NULL OR age='' OR age < 1 OR age > 120 THEN 41   -- 实测均值：ROUND(AVG(age),0)=41（合理区间 1~120，官方数据实测）
         ELSE age
     END AS age,
     city,
