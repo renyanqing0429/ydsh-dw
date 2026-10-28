@@ -1,0 +1,20 @@
+  -> 数据加载 (/sql/ods/load_data.sql)
+tbl	cnt
+ods_order_item	37549
+ods_order	15600
+ods_product	600
+ods_user_behavior	60000
+ods_store	60
+ods_user	1000
+ods_user.user_id	ods_user.user_name	ods_user.gender	ods_user.age	ods_user.city	ods_user.province	ods_user.register_date	ods_user.member_level	ods_user.phone	ods_user.email
+U000001	许浩然	女	42	宝鸡	陕西省	2023-11-25	金卡	13892127520	
+U000002	邓浩	未知	27	南京	江苏省	2024-02-10	普通会员	17659001220	
+U000003	胡辉	女	34	青岛	山东省	2024/06/21	银卡会员	13800869845	u000003@example.com
+U000004	孙涛	男	19	深圳	广东省	2023-01-09	钻石会员	15117423603	
+U000005	许秀英	女	41	合肥	安徽省	2023/05/22	普通会员	19122042964	u000005@example.com
+ods_order.order_id	ods_order.user_id	ods_order.store_id	ods_order.order_date	ods_order.order_time	ods_order.pay_amount	ods_order.discount_amount	ods_order.pay_type	ods_order.order_status	ods_order.channel
+O2024009760	U000607	S004	2024-07-26	21:40:40	2484.13	587.46	货到付款	已完成	APP
+O2024001112	U000953	S021	2024-01-06	18:31:25	4470.79	673.55	银行卡	待支付	门店
+O2024007375	U000926	S053	2024/09/10	08:57:24	2684.79	395.38	货到付款	已完成	门店
+O2024005273	U000603	S038	2024-04-28	03:41:06	1334.99	219.84	支付宝	待支付	PC官网
+O2024012173	U000039	S027	2024-11-21	08:34:21	952.32	259.64	微信支付	已支付	APP

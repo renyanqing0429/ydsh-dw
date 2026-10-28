@@ -7,6 +7,9 @@ cd "$(dirname "$0")/.." || exit 1
 STEP="${1:-all}"
 
 export PATH="$PATH:/c/Program Files/Docker/Docker/resources/bin"
+# Git Bash 会把 "/sql/..." 这类容器内路径改写成 Windows 路径，导致 beeline -f 失败
+# （详见 docs/环境搭建笔记.md 问题9），此处关闭该行为；Linux/macOS 下此变量无副作用
+export MSYS_NO_PATHCONV=1
 if ! docker info >/dev/null 2>&1; then
   echo "[错误] Docker 引擎未运行，请先启动 Docker Desktop"
   exit 1

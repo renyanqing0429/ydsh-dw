@@ -19,6 +19,8 @@ O2024000032	2
 O2024000048	2
 O2024000080	2
 O2024000090	2
+fully_dup_groups	content_conflict_groups
+198	388
 before_dedup	after_dedup	removed_rows
 15600	15000	600
 residual_dup

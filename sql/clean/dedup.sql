@@ -27,7 +27,8 @@ FROM (
         order_id,
         COUNT(*) AS id_cnt,
         COUNT(DISTINCT CONCAT_WS('|', user_id, store_id, order_date, order_time,
-              pay_amount, discount_amount, pay_type, order_status, channel)) AS all_cols_cnt
+              CAST(pay_amount AS STRING), CAST(discount_amount AS STRING),
+              pay_type, order_status, channel)) AS all_cols_cnt
     FROM ods_order
     GROUP BY order_id
 ) t;

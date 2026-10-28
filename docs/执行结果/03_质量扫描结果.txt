@@ -1,3 +1,4 @@
+  -> 五维度扫描 (/sql/quality/quality_check.sql)
 total	age_null_cnt	email_null_cnt
 1000	51	193
 total	launch_date_null_cnt
