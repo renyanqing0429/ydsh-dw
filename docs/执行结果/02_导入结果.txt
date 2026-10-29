@@ -1,11 +1,11 @@
   -> 数据加载 (/sql/ods/load_data.sql)
 tbl	cnt
-ods_order_item	37549
-ods_order	15600
 ods_product	600
-ods_user_behavior	60000
+ods_order_item	37549
 ods_store	60
 ods_user	1000
+ods_order	15600
+ods_user_behavior	60000
 ods_user.user_id	ods_user.user_name	ods_user.gender	ods_user.age	ods_user.city	ods_user.province	ods_user.register_date	ods_user.member_level	ods_user.phone	ods_user.email
 U000001	许浩然	女	42	宝鸡	陕西省	2023-11-25	金卡	13892127520	
 U000002	邓浩	未知	27	南京	江苏省	2024-02-10	普通会员	17659001220	

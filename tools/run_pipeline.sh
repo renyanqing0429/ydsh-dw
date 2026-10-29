@@ -17,9 +17,17 @@ fi
 
 BEELINE="docker exec hive-server beeline -u jdbc:hive2://localhost:10000 --silent=true --outputformat=tsv2"
 
+# 部分 Docker Desktop 版本未注册 compose 插件，此处自动回退到独立二进制 docker-compose
+if docker compose version >/dev/null 2>&1; then
+  DC="docker compose"
+else
+  DC="docker-compose"
+fi
+echo "      使用编排命令：$DC"
+
 wait_hive() {
   echo "[1/6] 启动容器..."
-  docker compose up -d
+  $DC up -d
   echo "[2/6] 等待 HiveServer2 就绪（最长 5 分钟）..."
   for i in $(seq 1 60); do
     if docker exec hive-server bash -c 'echo > /dev/tcp/localhost/10000' 2>/dev/null; then
@@ -43,6 +51,12 @@ mkdir -p "docs/执行结果"
 case "$STEP" in
   create|all)
     wait_hive || exit 1
+    if [ "$STEP" = "all" ]; then
+      echo "[3/6] 重置数据库（容器重建后 HDFS 数据已丢失，需全量重跑）..."
+      echo "DROP DATABASE IF EXISTS ydsh_ods CASCADE;" | docker exec -i hive-server \
+        beeline -u jdbc:hive2://localhost:10000 --silent=true >/dev/null 2>&1
+      echo "      旧库已清空"
+    fi
     echo "[3/6] 建库建表..."
     run_sql /sql/ods/create_ods.sql "ODS 建表" | tee docs/执行结果/01_建表结果.txt
     ;;
