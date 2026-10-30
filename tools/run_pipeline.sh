@@ -65,7 +65,7 @@ esac
 case "$STEP" in
   load|all)
     echo "[4/6] 导入数据并校验行数..."
-    run_sql /sql/ods/load_data.sql "数据加载" | tee docs/执行结果/02_导入结果.txt
+    run_sql /sql/ods/load_ods.sql "数据加载" | tee docs/执行结果/02_导入结果.txt
     ;;
 esac
 

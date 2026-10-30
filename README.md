@@ -5,9 +5,9 @@
 
 ## 团队信息
 
-- **团队名称**：（待定）
-- **团队口号**：（待定）
-- **仓库地址**：https://gitee.com/ren-yanqing/ydsh-dw.git
+- **团队名称**：云购数仓组
+- **团队口号**：让每一行数据都可追溯
+- **仓库地址**：GitHub `https://github.com/renyanqing0429/ydsh-dw` ｜ Gitee `https://gitee.com/ren-yanqing/ydsh-dw`
 
 | 角色 | 成员 | 职责 | 对应交付物 |
 |---|---|---|---|
@@ -42,17 +42,18 @@
 - [x] 子任务 1：团队组建与项目规划 → `README.md`（本文件）
 - [x] 子任务 2：开发环境搭建 → `docker-compose.yml` + `docs/环境搭建笔记.md`
 - [x] 子任务 3：Git 基础与版本管理规范 → 本仓库提交历史 + `.gitignore`
-- [x] 子任务 4：数据导入 ODS 层 → `sql/ods/create_ods.sql`、`sql/ods/load_data.sql`
-- [x] 子任务 5：数据质量预评估 → `sql/quality/quality_check.sql` + `docs/数据质量预评估表.md`
+- [x] 子任务 4：数据导入 ODS 层 → `sql/ods/create_ods.sql`、`sql/ods/load_ods.sql`
+- [x] 子任务 5：数据质量预评估 → `sql/quality/quality_check.sql` + `docs/数据质量预评估表.xlsx`
 - [x] 子任务 6：缺失值诊断与处理 → `sql/clean/missing_values.sql`
 - [x] 子任务 7：重复值检测与去重 → `sql/clean/dedup.sql`
+- [x] 附加：AI 协同日志 → `docs/云购数仓组_第1周_AI协同日志.md`；项目过程记录 → `docs/项目工作日志.md`
 
 ### 第 1 周实测结论（Hive 真实执行）
 
 | 环节 | 结果 |
 |---|---|
 | ODS 导入 | ods_user 1000 / ods_product 600 / ods_store 60 / ods_order 15600 / ods_order_item 37549 / ods_user_behavior 60000，与手册预期逐表一致 |
-| 质量扫描 | email 缺失 193、枚举脏值约 2500 行、斜杠日期 1902 行、手机号不合格 102、负金额 310、优惠超支付 324、年龄越界 27 |
+| 质量扫描 | email 缺失 193、枚举脏值 6,506 行、斜杠日期 1902 行、手机号不合格 102、负金额 310、优惠超支付 324、年龄越界 27 |
 | 缺失值清洗 | `dwd_user` 年龄异常 78 → 0（均值 41 填充，邮箱缺失 193 条打标保留）；`dwd_product` 上架日期缺失 11 → 0 |
 | 重复值去重 | `dwd_order` 15600 → 15000，移除 600 行重复，复检残留 0 |
 
@@ -67,12 +68,16 @@ ydsh-dw/
 ├── docker-compose.yml         # Hive + MySQL 容器编排
 ├── docs/
 │   ├── 环境搭建笔记.md        # 14 个真实问题与解决方案
-│   ├── 数据质量预评估表.md    # 五维度扫描结果
+│   ├── 数据质量预评估表.xlsx   # 五维度扫描结果（8 个工作表，主交付物）
+│   ├── 数据质量预评估表.md     # 同内容的 Markdown 版（便于 Git diff）
+│   ├── Hive查询速查手册.md     # 答辩演示查询与客户端连接
+│   ├── 项目工作日志.md         # 10-26~10-30 每日过程记录
+│   ├── 云购数仓组_第1周_AI协同日志.md  # AI 协同记录（9 条）
 │   └── 执行结果/              # beeline 实测输出存档
 ├── sql/
 │   ├── ods/
 │   │   ├── create_ods.sql     # ODS 层建表脚本
-│   │   └── load_data.sql      # 数据加载与行数校验
+│   │   └── load_ods.sql      # 数据加载与行数校验
 │   ├── quality/
 │   │   └── quality_check.sql  # 五维度质量扫描
 │   └── clean/
@@ -91,7 +96,7 @@ ydsh-dw/
 docker compose up -d                       # 启动 MySQL + Hive Metastore + HiveServer2
 docker cp sql/ods/create_ods.sql hive-server:/tmp/
 docker exec hive-server beeline -u jdbc:hive2://localhost:10000 -f /tmp/create_ods.sql
-# 其余脚本同理：load_data.sql → quality_check.sql → missing_values.sql → dedup.sql
+# 其余脚本同理：load_ods.sql → quality_check.sql → missing_values.sql → dedup.sql
 ```
 
 > Git Bash 下执行需先 `export MSYS_NO_PATHCONV=1`，否则容器内路径会被改写，详见环境搭建笔记。
