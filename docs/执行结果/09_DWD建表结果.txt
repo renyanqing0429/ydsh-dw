@@ -1,0 +1,205 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tab_name
+dim_behavior_type_code
+dim_channel_code
+dim_date
+dim_member_level_code
+dim_order_status_code
+dim_pay_type_code
+dim_product
+dim_store
+dim_user
+dwd_order
+dwd_order_item
+dwd_user_behavior
+dwd_user_behavior_bucket
+stg_behavior_clean
+stg_behavior_enum
+stg_behavior_merge
+stg_order_clean
+stg_order_enum
+stg_order_item_clean
+stg_order_merge
+stg_product_clean
+stg_product_enum
+stg_store_clean
+stg_user_clean
+stg_user_enum
+stg_user_merge
+tmp_age_mean
+tmp_amount_cap
+tmp_category_avg_price
+
+col_name	data_type	comment
+order_id	string	??ID????
+user_id	string	??ID ? dim_user
+store_id	string	??ID ? dim_store
+order_timestamp	string	????? yyyy-MM-dd HH:mm:ss??????
+order_month	string	???? yyyy-MM
+pay_amount	double	????????
+discount_amount	double	????????
+pay_type	string	?????????
+order_status	string	?????????
+channel	string	?????????
+is_valid_order	int	??????????/???=1?
+is_amount_fixed	int	???????? 1=?
+order_date	string	?????????
+	NULL	NULL
+# Partition Information	NULL	NULL
+# col_name	data_type	comment
+order_date	string	?????????
+
+[WARN] Failed to create directory: /home/hive/.beeline
+No such file or directory
