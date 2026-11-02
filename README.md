@@ -2,6 +2,7 @@
 
 课程：企业项目实战实训
 阶段：第 1 周 · 项目启动 · 环境搭建 · Git 基础 · 数据导入与数据清洗（一）
+　　　第 2 周 · 数据清洗进阶 · Hive 四层数仓建模 · 探索性分析
 
 ## 团队信息
 
@@ -34,7 +35,8 @@
 | 阶段 | 内容 | 状态 |
 |---|---|---|
 | 第 1 周 | 环境搭建、Git 规范、ODS 导入、质量预评估、清洗（缺失值/重复值） | ✅ 已完成 |
-| 第 2 周+ | 数据清洗（二）、维度建模、指标计算 | ⏳ 待开始 |
+| 第 2 周 | 清洗（枚举/异常/格式）、四层架构设计、DWD 维度建模与加载、探索性分析 | ✅ 已完成 |
+| 第 3 周+ | DWS 汇总层、ADS 应用层、指标模型（RFM / 履约漏斗） | ⏳ 待开始 |
 | 后续 | Superset 可视化大屏、项目答辩 | ⏳ 待开始 |
 
 ## 第 1 周子任务与交付物
@@ -59,6 +61,27 @@
 
 执行明细见 `docs/执行结果/` 目录。
 
+## 第 2 周子任务与交付物
+
+- [x] 子任务 1：枚举字段标准化 → `sql/clean/standardize_enum.sql`
+- [x] 子任务 2：异常值与格式标准化 → `sql/clean/outlier_format.sql`
+- [x] 子任务 3：字段拆分合并与编码映射 → `sql/clean/split_merge.sql`（5 张 `dim_*_code` 映射表）
+- [x] 子任务 4：数据质量对比报告 → `sql/quality/quality_compare.sql` + `docs/数据质量清洗报告.md`
+- [x] 子任务 5：四层数仓架构设计 → `docs/数仓架构设计文档.md`
+- [x] 子任务 6：DWD 维度建模与加载 → `sql/dwd/create_dwd.sql`、`sql/dwd/load_dwd.sql`
+- [x] 子任务 7：探索性分析 → `sql/analysis/exploratory_analysis.sql` + `docs/探索性分析简报.md`
+- [x] 附加：`docs/第2周总结.md`、`docs/云购数仓组_第2周_AI协同日志.md`
+
+### 第 2 周实测结论（Hive 真实执行）
+
+| 环节 | 结果 |
+|---|---|
+| 枚举标准化 | gender 8→3、member_level 12→4、order_status 12→5、pay_type 7→4、channel 6→4、behavior_type 10→4，未命中映射 0 |
+| 异常与格式 | 金额封顶 304 行（阈值 P95=4,745.32）、年龄均值 41 填充 78 行、日期/手机号/行为时间残留均 0 |
+| 质量对比 | 五类脏数据 72,877 → 193（全部为邮箱空值，按策略保留打标），整体修复率 **99.74%**；剔除邮箱口径 100% |
+| DWD 建模 | dim_user 1,000 / dim_product 600 / dim_store 60 / dim_date 366；dwd_order 15,000（366 分区）/ dwd_order_item 37,549 / dwd_user_behavior 60,000（92 分区）+ 分桶表 8 桶 |
+| 探索性分析 | GMV 3,847.05 万、客单价 2,564.70、ARPU 38,470.43、订单有效率 66.44%；17% 高价值用户贡献 25% GMV |
+
 ## 目录结构
 
 ```
@@ -68,22 +91,36 @@ ydsh-dw/
 ├── docker-compose.yml         # Hive + MySQL 容器编排
 ├── docs/
 │   ├── 第1周总结.md           # 独立总结报告（任务/数据/质量/清洗/计划）
-│   ├── 环境搭建笔记.md        # 14 个真实问题与解决方案
+│   ├── 第2周总结.md           # 第 2 周总结（清洗/建模/分析）
+│   ├── 数仓架构设计文档.md     # 四层架构 + 星型模型 + 分区分桶 + 命名规范
+│   ├── 数据质量清洗报告.md     # 五类脏数据修复率（第 2 周）
+│   ├── 探索性分析简报.md       # KPI 与多维分布分析（第 2 周）
+│   ├── 环境搭建笔记.md        # 19 个真实问题与解决方案
 │   ├── 数据质量预评估表.xlsx   # 五维度扫描结果（8 个工作表，主交付物）
 │   ├── 数据质量预评估表.md     # 同内容的 Markdown 版（便于 Git diff）
 │   ├── Hive查询速查手册.md     # 答辩演示查询与客户端连接
-│   ├── 项目工作日志.md         # 10-26~10-30 每日过程记录
+│   ├── 项目工作日志.md         # 每日过程记录（含第 2 周）
 │   ├── 云购数仓组_第1周_AI协同日志.md  # AI 协同记录（9 条）
-│   └── 执行结果/              # beeline 实测输出存档
+│   ├── 云购数仓组_第2周_AI协同日志.md  # AI 协同记录（10 条）
+│   └── 执行结果/              # beeline 实测输出存档（01~12）
 ├── sql/
 │   ├── ods/
 │   │   ├── create_ods.sql     # ODS 层建表脚本
 │   │   └── load_ods.sql      # 数据加载与行数校验
 │   ├── quality/
-│   │   └── quality_check.sql  # 五维度质量扫描
-│   └── clean/
-│       ├── missing_values.sql # 缺失值处理
-│       └── dedup.sql          # 重复值去重
+│   │   ├── quality_check.sql  # 五维度质量扫描（第 1 周）
+│   │   └── quality_compare.sql # 清洗前后质量对比与修复率（第 2 周）
+│   ├── clean/
+│   │   ├── missing_values.sql # 缺失值处理
+│   │   ├── dedup.sql          # 重复值去重
+│   │   ├── standardize_enum.sql # 枚举字段标准化（第 2 周）
+│   │   ├── outlier_format.sql   # 异常值与格式标准化（第 2 周）
+│   │   └── split_merge.sql      # 字段拆分合并 + 编码映射维度表（第 2 周）
+│   ├── dwd/
+│   │   ├── create_dwd.sql     # DWD 维度表 / 事实表建模（ORC + 分区）
+│   │   └── load_dwd.sql       # DWD 层数据加载（含分桶表）
+│   └── analysis/
+│       └── exploratory_analysis.sql  # 探索性分析（第 2 周）
 ├── tools/
 │   ├── gen_mock_data.py       # 模拟数据生成（官方数据下发前的过渡方案）
 │   └── run_pipeline.sh        # 一键跑完整流水线
@@ -95,18 +132,21 @@ ydsh-dw/
 
 ```bash
 docker compose up -d                       # 启动 MySQL + Hive Metastore + HiveServer2
-docker cp sql/ods/create_ods.sql hive-server:/tmp/
-docker exec hive-server beeline -u jdbc:hive2://localhost:10000 -f /tmp/create_ods.sql
-# 其余脚本同理：load_ods.sql → quality_check.sql → missing_values.sql → dedup.sql
+bash tools/run_pipeline.sh all             # 第 1 周：建库建表 → 导入 → 质量扫描 → 清洗
+bash tools/run_pipeline.sh week2           # 第 2 周：枚举 → 异常/格式 → 合并映射 → DWD 建模加载 → 质量对比 → 分析
+bash tools/run_pipeline.sh analysis        # 单独重跑探索性分析
 ```
 
 > Git Bash 下执行需先 `export MSYS_NO_PATHCONV=1`，否则容器内路径会被改写，详见环境搭建笔记。
+> 所有写入均使用 `INSERT OVERWRITE` 幂等写入，脚本可重复执行（Hive 4 的 `CREATE TABLE` 默认为外部表，
+> `DROP TABLE` 只删元数据，重复跑会数据翻倍，详见环境笔记问题 19）。
 
 ## 环境说明
 
 - Hive 4.0.0（Metastore 元数据存于 MySQL 8.0），通过 Docker Compose 编排
-- 数据库名：`ydsh_ods`（ODS 贴源层）
+- 数据库名：`ydsh_ods`（ODS 贴源层）、`ydsh_dwd`（DWD 明细层 + STG 清洗中间层）
 - 建表均带 `tblproperties('skip.header.line.count'='1')` 跳过 CSV 表头
+- DWD 层全部 `STORED AS ORC`，事实表按日期分区，行为表另建 8 桶分桶版本
 
 ## 参考资源
 
