@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# 一键执行第1周数据流水线：启动容器 -> 建库建表 -> 导入 -> 质量扫描 -> 清洗
-# 用法：bash tools/run_pipeline.sh [create|load|quality|clean|all]
+# 一键执行数据流水线：启动容器 -> 建库建表 -> 导入 -> 质量扫描 -> 清洗 -> DWD 建模 -> 分析
+# 用法：bash tools/run_pipeline.sh [create|load|quality|clean|week2|analysis|all]
 set -u
 
 cd "$(dirname "$0")/.." || exit 1
@@ -55,7 +55,10 @@ case "$STEP" in
       echo "[3/6] 重置数据库（容器重建后 HDFS 数据已丢失，需全量重跑）..."
       echo "DROP DATABASE IF EXISTS ydsh_ods CASCADE;" | docker exec -i hive-server \
         beeline -u jdbc:hive2://localhost:10000 --silent=true >/dev/null 2>&1
-      echo "      旧库已清空"
+      # Hive 4 的 CREATE TABLE 默认是外部表，DROP DATABASE 只删元数据、不删数据文件；
+      # 若不清理目录，重新建表会重新挂载旧文件，导致重复导入（行数翻倍）
+      docker exec hive-server bash -c 'rm -rf /opt/hive/data/warehouse/ydsh_ods.db' 2>/dev/null
+      echo "      旧库及残留数据目录已清空"
     fi
     echo "[3/6] 建库建表..."
     run_sql /sql/ods/create_ods.sql "ODS 建表" | tee docs/执行结果/01_建表结果.txt
@@ -81,6 +84,27 @@ case "$STEP" in
     echo "[6/6] 缺失值与重复值清洗..."
     run_sql /sql/clean/missing_values.sql "缺失值处理" | tee docs/执行结果/04_缺失值处理结果.txt
     run_sql /sql/clean/dedup.sql "重复值去重" | tee docs/执行结果/05_去重结果.txt
+    ;;
+esac
+
+# 第 2 周：枚举标准化 -> 异常值/格式 -> 字段合并与编码映射 -> DWD 建模加载 -> 质量对比 -> 探索性分析
+case "$STEP" in
+  week2)
+    wait_hive || exit 1
+    run_sql /sql/clean/standardize_enum.sql "枚举字段标准化" | tee docs/执行结果/06_枚举标准化结果.txt
+    run_sql /sql/clean/outlier_format.sql   "异常值与格式标准化" | tee docs/执行结果/07_异常值与格式标准化结果.txt
+    run_sql /sql/clean/split_merge.sql      "字段合并与编码映射" | tee docs/执行结果/08_字段合并与编码映射结果.txt
+    run_sql /sql/dwd/create_dwd.sql         "DWD 层建模" | tee docs/执行结果/09_DWD建表结果.txt
+    run_sql /sql/dwd/load_dwd.sql           "DWD 层加载" | tee docs/执行结果/10_DWD加载结果.txt
+    run_sql /sql/quality/quality_compare.sql "清洗前后质量对比" | tee docs/执行结果/11_质量对比结果.txt
+    run_sql /sql/analysis/exploratory_analysis.sql "探索性分析" | tee docs/执行结果/12_探索性分析结果.txt
+    ;;
+esac
+
+case "$STEP" in
+  analysis)
+    wait_hive || exit 1
+    run_sql /sql/analysis/exploratory_analysis.sql "探索性分析" | tee docs/执行结果/12_探索性分析结果.txt
     ;;
 esac
 
