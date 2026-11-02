@@ -1,0 +1,443 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b.dirty_type	b.item	before_cnt	after_cnt	fix_rate_pct
+数值异常	discount<0或>pay_amount	1076	0	100.00
+数值异常	unit_price<0	798	0	100.00
+数值异常	quantity<=0	718	0	100.00
+数值异常	pay_amount<=0或>10000	622	0	100.00
+数值异常	age不在1~120	78	0	100.00
+数值异常	price<=0	20	0	100.00
+枚举不规范	behavior_type	57551	0	100.00
+枚举不规范	order_status	1375	0	100.00
+枚举不规范	pay_type	651	0	100.00
+枚举不规范	gender	498	0	100.00
+枚举不规范	channel	310	0	100.00
+枚举不规范	member_level	108	0	100.00
+格式错误	behavior_time非标准	6088	0	100.00
+格式错误	order_date非yyyy-MM-dd	1902	0	100.00
+格式错误	register_date非yyyy-MM-dd	125	0	100.00
+格式错误	phone含非数字字符(非11位纯数字)	102	0	100.00
+缺失值	email为空	193	193	0.00
+缺失值	age为空	51	0	100.00
+缺失值	launch_date为空	11	0	100.00
+重复值	订单重复多出行	600	0	100.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b.dirty_type	before_cnt	after_cnt	fix_rate_pct
+枚举不规范	60493	0	100.00
+格式错误	8217	0	100.00
+数值异常	3312	0	100.00
+重复值	600	0	100.00
+缺失值	255	193	24.31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dirty_type	before_cnt	after_cnt	fix_rate_pct
+缺失值(不含email)	62	0	100.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+item	cnt
+product_before	600
+order_after	15000
+behavior_after	60000
+user_before	1000
+order_before	15600
+user_after	1000
+product_after	600
+behavior_before	60000
+
+
+[WARN] Failed to create directory: /home/hive/.beeline
+No such file or directory
