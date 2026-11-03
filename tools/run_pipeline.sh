@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 一键执行数据流水线：启动容器 -> 建库建表 -> 导入 -> 质量扫描 -> 清洗 -> DWD 建模 -> 分析
-# 用法：bash tools/run_pipeline.sh [create|load|quality|clean|week2|analysis|all]
+# 用法：bash tools/run_pipeline.sh [create|load|quality|clean|week2|dws|analysis|all]
 set -u
 
 cd "$(dirname "$0")/.." || exit 1
@@ -97,7 +97,18 @@ case "$STEP" in
     run_sql /sql/dwd/create_dwd.sql         "DWD 层建模" | tee docs/执行结果/09_DWD建表结果.txt
     run_sql /sql/dwd/load_dwd.sql           "DWD 层加载" | tee docs/执行结果/10_DWD加载结果.txt
     run_sql /sql/quality/quality_compare.sql "清洗前后质量对比" | tee docs/执行结果/11_质量对比结果.txt
+    run_sql /sql/dws/create_dws_load.sql    "DWS 汇总层构建" | tee docs/执行结果/13_DWS层构建结果.txt
+    run_sql /sql/ads/create_ads_load.sql    "ADS 应用层构建" | tee docs/执行结果/14_ADS层构建结果.txt
     run_sql /sql/analysis/exploratory_analysis.sql "探索性分析" | tee docs/执行结果/12_探索性分析结果.txt
+    ;;
+esac
+
+# 只补 DWS/ADS 两层（DWD 已有数据时用，避免整条链路重跑）
+case "$STEP" in
+  dws)
+    wait_hive || exit 1
+    run_sql /sql/dws/create_dws_load.sql "DWS 汇总层构建" | tee docs/执行结果/13_DWS层构建结果.txt
+    run_sql /sql/ads/create_ads_load.sql "ADS 应用层构建" | tee docs/执行结果/14_ADS层构建结果.txt
     ;;
 esac
 
