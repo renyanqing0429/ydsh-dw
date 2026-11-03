@@ -11,7 +11,7 @@
 | 团队成员 | 任宴庆（项目经理 / 数据工程师 / 数据分析师，第 2 周全流程执行） |
 | 使用场景 | 任务拆解、HiveQL 脚本编写与调试、数据建模设计、质量统计口径设计、分析结果解读、文档撰写 |
 | 协同周期 | 2026-11-02（第 2 周） |
-| 协同记录数 | 11 条 |
+| 协同记录数 | 12 条 |
 | 项目仓库 | GitHub `github.com/renyanqing0429/ydsh-dw` ；Gitee `gitee.com/ren-yanqing/ydsh-dw` |
 
 ## 二、使用的工具与模型
@@ -39,6 +39,7 @@
 | 9 | 质量口径 | 「修复率怎么算才经得起答辩提问」 | 给出「修复率 =（清洗前 - 清洗后）/ 清洗前」的口径，并把脏数据分成五类逐项统计 | 人工明确两个口径细节：① 重复值按「重复多出行」计量；② 邮箱缺失是「保留+打标」策略，单列说明并补算剔除邮箱后的修复率 | `sql/quality/quality_compare.sql`、`数据质量对比报告.md` |
 | 10 | 分析解读 | 「探索性分析结果怎么落到经营结论」 | 输出 14 组分析（KPI、品类/省份/门店/渠道分布、月度趋势、用户分层、行为构成），并总结 8 条发现 | 人工识别出两处**反直觉结果**并标为数据质量问题而非结论：① 会员等级与消费力不相关；② 行为事件不构成真实漏斗 | `sql/analysis/exploratory_analysis.sql`、`探索性分析简报.md` |
 | 11 | 架构补齐 | 「任务书总述要求 ODS→DWD→DWS→ADS 四层，现在只到 DWD，补上 DWS 和 ADS」 | 产出 `sql/dws/create_dws_load.sql`（订单/用户/品类/渠道 4 张日汇总表，5,124 行）与 `sql/ads/create_ads_load.sql`（总览/趋势/品类/渠道/省份/分层/会员 7 张应用表，401 行），并给出四层 GMV 对账（差异 0） | 人工否掉了 AI 第一版的两个做法：① 用日汇总 `buyer_cnt` 相加算 ARPU（14,675 人次 ≠ 1,000 人，差 14.7 倍）；② 沿用 5 万/2 万分层阈值（有效订单口径下只剩 7 人达标）。改为 DWD 全周期去重取数 + 按 P80/P40 重标定 3.5 万/2 万 | `sql/dws/create_dws_load.sql`、`sql/ads/create_ads_load.sql`、`执行结果/13~14_*.txt` |
+| 12 | 口径治理 + 分析深化 | 「① 上一轮只是双口径并列规避，无效订单的 `pay_amount` 还在污染源头，从 DWD 修掉；② 用户只按金额分了三段，补 RFM；③ 之前说要做履约漏斗，一并落地」 | ① 在 `dwd_order` 增 `pay_amount_valid` / `discount_amount_valid`，加载时无效订单置 0，DWS 四张表改读有效字段；② 用 `NTILE(5)` 做 R/F/M 五分位打分，组合成 8 类客群；③ 建 `ads_order_funnel`，用「原始金额 − 有效金额」直接算每步流失 | 人工否掉了 AI 第一版的行为转化漏斗：实测 60,000 条行为只落在 58,132 个会话（1.03 条/会话），四类行为 UV 为 1000/1000/995/1000、购买次数反超加购，**不满足漏斗单调性**。改为输出「行为构成与覆盖」并打 `funnel_valid=0`，把「数据不可用」本身作为结论。另要求保留原始 `pay_amount`，否则流失金额算不出来 | `sql/ads/rfm_funnel.sql`、`执行结果/15_RFM与漏斗结果.txt`、ADS 11 张表 |
 
 ## 四、产出成果清单
 
@@ -56,6 +57,8 @@
 | 10 | 执行结果存档 | `docs/执行结果/06~12_*.txt` | 7 份 beeline 实测输出，可逐条回溯 |
 | 11 | DWS 汇总层 | `sql/dws/create_dws_load.sql` | 4 张表 5,124 行、366 分区，实测通过 |
 | 12 | ADS 应用层 | `sql/ads/create_ads_load.sql` | 7 张表 401 行，四层 GMV 对账差异 0 |
+| 13 | ADS 深化分析 | `sql/ads/rfm_funnel.sql` | RFM 明细 1,000 + 客群 8 + 行为覆盖 4 + 履约漏斗 3，ADS 合计 11 张 1,401 行 |
+| 14 | 口径下沉改造 | `sql/dwd/create_dwd.sql`、`load_dwd.sql`、`sql/dws/create_dws_load.sql` | 新增有效金额字段，DWS 改读后四层 GMV 仍为 25,643,462.77，差异 0 |
 
 ## 五、问题与解决
 
@@ -67,6 +70,8 @@
 | 4 | Counters limit exceeded: Too many counters: 121 max=120 | 单条 SQL 十几个 `UNION ALL` 分支，Tez 每个算子都注册计数器 | 按脏数据类别拆分多条 `INSERT`，单条分支控制在 4 个以内 |
 | 5 | 重跑脚本后行数翻倍（编码表 11 → 22 行，`stg_order_merge` 1.5 万 → 12 万） | Hive 4 的 `CREATE TABLE` 默认建外部表，`DROP TABLE` 只删元数据，重建后旧文件被重新挂载再追加 | 全量写入改 `INSERT OVERWRITE`；流水线重置库时同步 `rm -rf` 残留目录 |
 | 6 | 封顶后出现 `discount_amount > pay_amount` 残留 280 行 | 优惠金额钳制写在了支付金额封顶之前 | 调整语句顺序：先封顶支付金额，再钳制优惠金额 |
+| 7 | `INSERT OVERWRITE TABLE ... WITH agg AS (...) SELECT` 报 `cannot recognize input near 'WITH'` | Hive 4 不支持「INSERT 后接 WITH」的写法（CTE 只能出现在查询开头） | 聚合子查询在三个 `UNION ALL` 分支内联；表仅 1.5 万行，重复扫描代价可忽略 |
+| 8 | 行为转化漏斗做不出来 | 埋点是独立随机生成：会话人均 1.03 条，四类行为 UV 覆盖率≈100%，购买次数反超加购 | 不硬凑转化率，改建 `ads_behavior_coverage` 并置 `funnel_valid = 0`；漏斗改到订单状态链路上 |
 
 ## 六、反思与总结
 
@@ -95,6 +100,6 @@
 
 ### 6.4 下一步计划
 
-1. 第 3 周：落地 DWS 汇总层（`dws_user_order_1d`、`dws_product_sales_1d`）与 ADS 应用层指标表。
+1. ~~第 3 周：落地 DWS 汇总层与 ADS 应用层指标表~~ —— 已提前完成（DWS 4 张、ADS 11 张）。
 2. 引入拉链表处理维度缓慢变化（`dim_user_hist`）。
 3. 输出第 2 周答辩 PPT 与 Superset 看板原型。

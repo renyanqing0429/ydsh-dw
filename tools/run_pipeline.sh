@@ -99,6 +99,7 @@ case "$STEP" in
     run_sql /sql/quality/quality_compare.sql "清洗前后质量对比" | tee docs/执行结果/11_质量对比结果.txt
     run_sql /sql/dws/create_dws_load.sql    "DWS 汇总层构建" | tee docs/执行结果/13_DWS层构建结果.txt
     run_sql /sql/ads/create_ads_load.sql    "ADS 应用层构建" | tee docs/执行结果/14_ADS层构建结果.txt
+    run_sql /sql/ads/rfm_funnel.sql         "ADS 深化分析（RFM + 双漏斗）" | tee docs/执行结果/15_RFM与漏斗结果.txt
     run_sql /sql/analysis/exploratory_analysis.sql "探索性分析" | tee docs/执行结果/12_探索性分析结果.txt
     ;;
 esac
@@ -109,6 +110,7 @@ case "$STEP" in
     wait_hive || exit 1
     run_sql /sql/dws/create_dws_load.sql "DWS 汇总层构建" | tee docs/执行结果/13_DWS层构建结果.txt
     run_sql /sql/ads/create_ads_load.sql "ADS 应用层构建" | tee docs/执行结果/14_ADS层构建结果.txt
+    run_sql /sql/ads/rfm_funnel.sql "ADS 深化分析（RFM + 双漏斗）" | tee docs/执行结果/15_RFM与漏斗结果.txt
     ;;
 esac
 

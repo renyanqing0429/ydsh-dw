@@ -67,8 +67,113 @@ SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 tbl	row_cnt	dt_cnt
 dws_order_1d	366	366
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -149,8 +254,67 @@ dws_user_1d	366	14675	485
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 tbl	row_cnt	sales_sum
 dws_category_1d	2928	5.6120561011E8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -184,6 +348,9 @@ dws_channel_1d	1464	2.564346277E7
 
 
 
+
+
+
 tab_name
 dws_category_1d
 dws_channel_1d
@@ -194,8 +361,14 @@ dws_user_1d
 
 
 
+
+
+
+
+
 metric	val
 dws_total_rows	5124
+
 
 [WARN] Failed to create directory: /home/hive/.beeline
 No such file or directory

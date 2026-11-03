@@ -166,22 +166,27 @@ SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
 
 
 
+
+
+
+
+
 tbl	cnt
 dwd_user_behavior_bucket	60000
-dwd_order	15000
 dim_product	600
-dim_store	60
-dwd_user_behavior	60000
-dim_date	366
-dim_user	1000
 dwd_order_item	37549
+dim_date	366
+dwd_user_behavior	60000
+dwd_order	15000
+dim_store	60
+dim_user	1000
 
 
 
 
 item	cnt
-dwd_order_partitions	366
 dwd_behavior_partitions	92
+dwd_order_partitions	366
 
 
 
