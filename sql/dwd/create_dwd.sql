@@ -92,7 +92,9 @@ CREATE TABLE ydsh_dwd.dwd_order (
     order_status    STRING  COMMENT '订单状态（标准化）',
     channel         STRING  COMMENT '下单渠道（标准化）',
     is_valid_order  INT     COMMENT '是否有效订单（已完成/已支付=1）',
-    is_amount_fixed INT     COMMENT '金额是否经过修正 1=是'
+    is_amount_fixed INT     COMMENT '金额是否经过修正 1=是',
+    pay_amount_valid      DOUBLE COMMENT '有效支付金额：无效订单置 0（GMV 主口径，口径下沉到 DWD）',
+    discount_amount_valid DOUBLE COMMENT '有效优惠金额：无效订单置 0'
 ) COMMENT '订单事实表（订单粒度）'
 PARTITIONED BY (order_date STRING COMMENT '下单日期，分区字段')
 STORED AS ORC;

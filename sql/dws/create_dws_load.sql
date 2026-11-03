@@ -45,12 +45,12 @@ SELECT
     SUM(is_valid_order)                                             AS valid_order_cnt,
     COUNT(*) - SUM(is_valid_order)                                  AS invalid_order_cnt,
     ROUND(SUM(is_valid_order) * 100.0 / COUNT(*), 2)                AS valid_rate,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN pay_amount ELSE 0 END), 2)      AS gmv,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN discount_amount ELSE 0 END), 2) AS discount_total,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN pay_amount ELSE 0 END)
-          / NULLIF(SUM(is_valid_order), 0), 2)                      AS avg_order_amount,
+    -- 口径由 DWD 的 pay_amount_valid 提供（无效订单已在加载时置 0），此处不再重复写 CASE
+    ROUND(SUM(pay_amount_valid), 2)                                 AS gmv,
+    ROUND(SUM(discount_amount_valid), 2)                            AS discount_total,
+    ROUND(SUM(pay_amount_valid) / NULLIF(SUM(is_valid_order), 0), 2) AS avg_order_amount,
     COUNT(DISTINCT user_id)                                         AS buyer_cnt,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN pay_amount ELSE 0 END)
+    ROUND(SUM(pay_amount_valid)
           / NULLIF(COUNT(DISTINCT user_id), 0), 2)                  AS per_capita_gmv,
     order_date                                                      AS dt
 FROM ydsh_dwd.dwd_order
@@ -87,11 +87,11 @@ FROM (
         t.order_date,
         COUNT(DISTINCT t.user_id)                                  AS buyer_cnt,
         SUM(t.is_valid_order)                                      AS order_cnt,
-        ROUND(SUM(CASE WHEN t.is_valid_order = 1 THEN t.pay_amount ELSE 0 END), 2) AS gmv,
+        ROUND(SUM(t.pay_amount_valid), 2)                          AS gmv,
         COUNT(DISTINCT CASE WHEN t.valid_order_cnt_hist > 1 THEN t.user_id END)    AS repeat_buyer_cnt
     FROM (
         SELECT
-            d.order_date, d.user_id, d.is_valid_order, d.pay_amount,
+            d.order_date, d.user_id, d.is_valid_order, d.pay_amount_valid,
             SUM(d.is_valid_order) OVER (PARTITION BY d.user_id) AS valid_order_cnt_hist
         FROM ydsh_dwd.dwd_order d
     ) t
@@ -154,8 +154,8 @@ SELECT
     channel,
     COUNT(*)                                          AS order_cnt,
     SUM(is_valid_order)                               AS valid_order_cnt,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN pay_amount ELSE 0 END), 2) AS gmv,
-    ROUND(SUM(CASE WHEN is_valid_order = 1 THEN pay_amount ELSE 0 END)
+    ROUND(SUM(pay_amount_valid), 2)                   AS gmv,
+    ROUND(SUM(pay_amount_valid)
           / NULLIF(SUM(is_valid_order), 0), 2)        AS avg_order_amount,
     COUNT(DISTINCT user_id)                           AS user_cnt,
     order_date                                        AS dt

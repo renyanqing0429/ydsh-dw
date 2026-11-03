@@ -103,6 +103,11 @@ SELECT
     channel,
     is_valid_order,
     CASE WHEN is_amount_negative_fixed = 1 OR is_amount_capped = 1 THEN 1 ELSE 0 END AS is_amount_fixed,
+    -- 口径下沉：源数据中取消/退款/待支付订单同样写了 pay_amount（共 5,034 笔、约 1,282.70 万），
+    -- 真实业务不应计入 GMV。在此显式置 0，下游 DWS/ADS 直接用有效金额字段，
+    -- 不必每层重复写 SUM(CASE WHEN is_valid_order = 1 ...)，也避免漏写导致口径漂移。
+    CASE WHEN is_valid_order = 1 THEN pay_amount      ELSE 0 END AS pay_amount_valid,
+    CASE WHEN is_valid_order = 1 THEN discount_amount ELSE 0 END AS discount_amount_valid,
     order_date
 FROM ydsh_dwd.stg_order_merge;
 
