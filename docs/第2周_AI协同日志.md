@@ -11,7 +11,7 @@
 | 团队成员 | 任宴庆（项目经理 / 数据工程师 / 数据分析师，第 2 周全流程执行） |
 | 使用场景 | 任务拆解、HiveQL 脚本编写与调试、数据建模设计、质量统计口径设计、分析结果解读、文档撰写 |
 | 协同周期 | 2026-11-02（第 2 周） |
-| 协同记录数 | 10 条 |
+| 协同记录数 | 11 条 |
 | 项目仓库 | GitHub `github.com/renyanqing0429/ydsh-dw` ；Gitee `gitee.com/ren-yanqing/ydsh-dw` |
 
 ## 二、使用的工具与模型
@@ -38,6 +38,7 @@
 | 8 | 排障 | 「重跑脚本后行数翻倍，stg_order_merge 从 1.5 万变 12 万」 | 定位为 Hive 4 的 `CREATE TABLE` 默认建外部表，`DROP TABLE` 只删元数据，重建后旧文件被重新挂载；给出 `INSERT OVERWRITE` 幂等改造方案 | 人工核验 `DESCRIBE FORMATTED` 确认 Table Type 为 EXTERNAL_TABLE；顺带在流水线里加了数据目录清理 | 脚本幂等化 + 环境笔记问题 19 |
 | 9 | 质量口径 | 「修复率怎么算才经得起答辩提问」 | 给出「修复率 =（清洗前 - 清洗后）/ 清洗前」的口径，并把脏数据分成五类逐项统计 | 人工明确两个口径细节：① 重复值按「重复多出行」计量；② 邮箱缺失是「保留+打标」策略，单列说明并补算剔除邮箱后的修复率 | `sql/quality/quality_compare.sql`、`数据质量对比报告.md` |
 | 10 | 分析解读 | 「探索性分析结果怎么落到经营结论」 | 输出 14 组分析（KPI、品类/省份/门店/渠道分布、月度趋势、用户分层、行为构成），并总结 8 条发现 | 人工识别出两处**反直觉结果**并标为数据质量问题而非结论：① 会员等级与消费力不相关；② 行为事件不构成真实漏斗 | `sql/analysis/exploratory_analysis.sql`、`探索性分析简报.md` |
+| 11 | 架构补齐 | 「任务书总述要求 ODS→DWD→DWS→ADS 四层，现在只到 DWD，补上 DWS 和 ADS」 | 产出 `sql/dws/create_dws_load.sql`（订单/用户/品类/渠道 4 张日汇总表，5,124 行）与 `sql/ads/create_ads_load.sql`（总览/趋势/品类/渠道/省份/分层/会员 7 张应用表，401 行），并给出四层 GMV 对账（差异 0） | 人工否掉了 AI 第一版的两个做法：① 用日汇总 `buyer_cnt` 相加算 ARPU（14,675 人次 ≠ 1,000 人，差 14.7 倍）；② 沿用 5 万/2 万分层阈值（有效订单口径下只剩 7 人达标）。改为 DWD 全周期去重取数 + 按 P80/P40 重标定 3.5 万/2 万 | `sql/dws/create_dws_load.sql`、`sql/ads/create_ads_load.sql`、`执行结果/13~14_*.txt` |
 
 ## 四、产出成果清单
 
@@ -53,6 +54,8 @@
 | 8 | 探索性分析脚本 | `sql/analysis/exploratory_analysis.sql` | KPI、四维分布、月度趋势、用户分层、行为构成 |
 | 9 | 流水线脚本 | `tools/run_pipeline.sh` | 新增 `week2` / `analysis` 步骤，可一键复跑全链路 |
 | 10 | 执行结果存档 | `docs/执行结果/06~12_*.txt` | 7 份 beeline 实测输出，可逐条回溯 |
+| 11 | DWS 汇总层 | `sql/dws/create_dws_load.sql` | 4 张表 5,124 行、366 分区，实测通过 |
+| 12 | ADS 应用层 | `sql/ads/create_ads_load.sql` | 7 张表 401 行，四层 GMV 对账差异 0 |
 
 ## 五、问题与解决
 
