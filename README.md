@@ -66,11 +66,11 @@
 - [x] 子任务 1：枚举字段标准化 → `sql/clean/standardize_enum.sql`
 - [x] 子任务 2：异常值与格式标准化 → `sql/clean/outlier_format.sql`
 - [x] 子任务 3：字段拆分合并与编码映射 → `sql/clean/split_merge.sql`（5 张 `dim_*_code` 映射表）
-- [x] 子任务 4：数据质量对比报告 → `sql/quality/quality_compare.sql` + `docs/数据质量清洗报告.md`
+- [x] 子任务 4：数据质量对比报告 → `sql/quality/quality_compare.sql` + `docs/数据质量对比报告.docx`
 - [x] 子任务 5：四层数仓架构设计 → `docs/数仓架构设计文档.md`
 - [x] 子任务 6：DWD 维度建模与加载 → `sql/dwd/create_dwd.sql`、`sql/dwd/load_dwd.sql`
 - [x] 子任务 7：探索性分析 → `sql/analysis/exploratory_analysis.sql` + `docs/探索性分析简报.md`
-- [x] 附加：`docs/第2周总结.md`、`docs/云购数仓组_第2周_AI协同日志.md`
+- [x] 附加：`docs/第2周总结.md`、`docs/第2周_AI协同日志.md`
 
 ### 第 2 周实测结论（Hive 真实执行）
 
@@ -92,16 +92,17 @@ ydsh-dw/
 ├── docs/
 │   ├── 第1周总结.md           # 独立总结报告（任务/数据/质量/清洗/计划）
 │   ├── 第2周总结.md           # 第 2 周总结（清洗/建模/分析）
-│   ├── 数仓架构设计文档.md     # 四层架构 + 星型模型 + 分区分桶 + 命名规范
-│   ├── 数据质量清洗报告.md     # 五类脏数据修复率（第 2 周）
-│   ├── 探索性分析简报.md       # KPI 与多维分布分析（第 2 周）
+│   ├── 数仓架构设计文档.md/.docx  # 四层架构 + 星型模型 + 分区分桶 + 命名规范
+│   ├── 数据质量对比报告.md/.docx  # 五类脏数据修复率（第 2 周，提交清单第 2 项）
+│   ├── 探索性分析简报.md/.docx    # KPI 与多维分布分析（第 2 周，提交清单第 5 项）
+│   ├── html/                  # 上述三份文档的排版 HTML（docx 的转换源）
 │   ├── 环境搭建笔记.md        # 19 个真实问题与解决方案
 │   ├── 数据质量预评估表.xlsx   # 五维度扫描结果（8 个工作表，主交付物）
 │   ├── 数据质量预评估表.md     # 同内容的 Markdown 版（便于 Git diff）
 │   ├── Hive查询速查手册.md     # 答辩演示查询与客户端连接
 │   ├── 项目工作日志.md         # 每日过程记录（含第 2 周）
 │   ├── 云购数仓组_第1周_AI协同日志.md  # AI 协同记录（9 条）
-│   ├── 云购数仓组_第2周_AI协同日志.md  # AI 协同记录（10 条）
+│   ├── 第2周_AI协同日志.md     # AI 协同记录（10 条，六部分模板）
 │   └── 执行结果/              # beeline 实测输出存档（01~12）
 ├── sql/
 │   ├── ods/
@@ -123,6 +124,8 @@ ydsh-dw/
 │       └── exploratory_analysis.sql  # 探索性分析（第 2 周）
 ├── tools/
 │   ├── gen_mock_data.py       # 模拟数据生成（官方数据下发前的过渡方案）
+│   ├── md2html.py             # Markdown → 排版 HTML（封面 + A4 + 框图表格化）
+│   ├── postprocess_docx.py    # docx 印刷细节后处理（A4/封面分页/表头重复）
 │   └── run_pipeline.sh        # 一键跑完整流水线
 ├── jars/                      # MySQL JDBC 驱动（挂载进 Hive 容器）
 └── data/                      # 官方模拟数据 CSV（不入库，见 .gitignore）
