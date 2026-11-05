@@ -1,38 +1,4 @@
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  -> 枚举字段标准化 (/sql/clean/standardize_enum.sql)
 field	raw_value	cnt
 gender	女	212
 gender	男	182
@@ -54,12 +20,6 @@ member_level	金卡	12
 member_level	normal	11
 member_level	普通	11
 member_level	gold	10
-
-
-
-
-
-
 field	raw_value	cnt
 channel	门店	3724
 channel	APP	3703
@@ -86,9 +46,6 @@ pay_type	银行卡	3475
 pay_type	wechat	221
 pay_type	微信	208
 pay_type	alipay	196
-
-
-
 field	raw_value	cnt
 behavior_type	pv	32945
 behavior_type	buy	11393
@@ -100,9 +57,6 @@ behavior_type	收藏	616
 behavior_type	浏览	611
 behavior_type	PV	604
 behavior_type	购买	576
-
-
-
 field	raw_value	cnt
 category	[运动户外]	88
 category	[数码家电]	78
@@ -120,113 +74,6 @@ category	[服饰鞋包 ]	3
 category	[数码家电 ]	3
 category	[运动户外 ]	3
 category	[美妆个护 ]	1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 field	std_value	cnt
 gender	女	429
 gender	男	379
@@ -235,12 +82,6 @@ member_level	金卡会员	273
 member_level	钻石会员	253
 member_level	普通会员	244
 member_level	银卡会员	230
-
-
-
-
-
-
 field	std_value	cnt
 channel	APP	3864
 channel	门店	3724
@@ -255,21 +96,10 @@ pay_type	微信支付	4001
 pay_type	支付宝	3973
 pay_type	货到付款	3551
 pay_type	银行卡	3475
-
-
-
 field	std_value	cnt
 behavior_type	浏览	34160
 behavior_type	购买	11969
 behavior_type	加购	8286
 behavior_type	收藏	5585
-
-
-
-
-
 chk	cnt
 category_blank	0
-
-[WARN] Failed to create directory: /home/hive/.beeline
-No such file or directory

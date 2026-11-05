@@ -60,7 +60,7 @@
 | 12 | ADS 应用层 | `sql/ads/create_ads_load.sql` | 7 张表 401 行，四层 GMV 对账差异 0 |
 | 13 | ADS 深化分析 | `sql/ads/rfm_funnel.sql` | RFM 明细 1,000 + 客群 8 + 行为覆盖 4 + 履约漏斗 3，ADS 合计 11 张 1,401 行 |
 | 14 | 口径下沉改造 | `sql/dwd/create_dwd.sql`、`load_dwd.sql`、`sql/dws/create_dws_load.sql` | 新增有效金额字段，DWS 改读后四层 GMV 仍为 25,643,462.77，差异 0 |
-| 15 | ADS 商品/门店 | `sql/ads/product_store.sql` | 单品榜 600 + 门店坪效 60，ADS 合计 13 张 2,061 行 |
+| 15 | ADS 商品/门店 | `sql/ads/product_store.sql` | 单品榜 600 + 门店坪效 60，ADS 合计 13 张 2,076 行 |
 
 ## 五、问题与解决
 

@@ -1,156 +1,4 @@
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  -> DWD 层建模 (/sql/dwd/create_dwd.sql)
 tab_name
 dim_behavior_type_code
 dim_channel_code
@@ -181,7 +29,8 @@ stg_user_merge
 tmp_age_mean
 tmp_amount_cap
 tmp_category_avg_price
-
+tmp_quality_after
+tmp_quality_before
 col_name	data_type	comment
 order_id	string	??ID????
 user_id	string	??ID ? dim_user
@@ -195,11 +44,10 @@ order_status	string	?????????
 channel	string	?????????
 is_valid_order	int	??????????/???=1?
 is_amount_fixed	int	???????? 1=?
+pay_amount_valid	double	???????????? 0?GMV ????????? DWD?
+discount_amount_valid	double	???????????? 0
 order_date	string	?????????
 	NULL	NULL
 # Partition Information	NULL	NULL
 # col_name	data_type	comment
 order_date	string	?????????
-
-[WARN] Failed to create directory: /home/hive/.beeline
-No such file or directory
