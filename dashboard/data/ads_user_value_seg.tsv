@@ -1,0 +1,4 @@
+ads_user_value_seg.seg	ads_user_value_seg.user_cnt	ads_user_value_seg.user_share	ads_user_value_seg.order_cnt	ads_user_value_seg.gmv	ads_user_value_seg.gmv_share	ads_user_value_seg.arpu	ads_user_value_seg.avg_orders
+中价值(2-3.5万)	531	53.1	5495	1.430830939E7	55.8	26945.97	10.35
+长尾(<2万)	299	29.9	2029	4484646.96	17.49	14998.82	6.79
+高价值(>=3.5万)	170	17.0	2442	6850506.42	26.71	40297.1	14.36

@@ -1,0 +1,4 @@
+ads_order_funnel.step_no	ads_order_funnel.step_name	ads_order_funnel.order_cnt	ads_order_funnel.order_amount	ads_order_funnel.rate_from_prev	ads_order_funnel.rate_from_top	ads_order_funnel.lost_cnt	ads_order_funnel.lost_amount	ads_order_funnel.remark
+3	履约完成	5642	1.451229609E7	56.61	37.61	0	0.0	已完成，视为最终成交
+2	支付成功	9966	2.564346277E7	66.44	66.44	4324	1.113116668E7	已支付但未完成履约 4324 笔
+1	提交订单	15000	3.847043495E7	NULL	100.0	5034	1.282697218E7	待支付 2116 笔 + 已取消 2101 笔 + 退款中 817 笔

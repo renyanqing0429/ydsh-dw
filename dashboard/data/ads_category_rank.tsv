@@ -1,0 +1,9 @@
+ads_category_rank.rank_no	ads_category_rank.category	ads_category_rank.sales_amount	ads_category_rank.quantity	ads_category_rank.order_cnt	ads_category_rank.share_pct	ads_category_rank.cum_share_pct
+1	运动户外	8.410352861E7	22419	4821	14.99	14.99
+2	数码家电	7.92191833E7	19918	4497	14.12	29.1
+3	服饰鞋包	7.309596198E7	18730	4174	13.02	42.13
+4	食品生鲜	7.051613026E7	18395	4108	12.57	54.69
+5	图书文娱	6.715051161E7	17740	4155	11.97	66.66
+6	家居生活	6.555859395E7	17303	3791	11.68	78.34
+7	美妆个护	6.094940387E7	16208	3792	10.86	89.2
+8	母婴玩具	6.061229653E7	15809	3702	10.8	100.0

@@ -1,0 +1,5 @@
+ads_channel_dist.channel	ads_channel_dist.order_cnt	ads_channel_dist.valid_order_cnt	ads_channel_dist.valid_rate	ads_channel_dist.gmv	ads_channel_dist.aov	ads_channel_dist.gmv_share	ads_channel_dist.order_share
+APP	3864	2549	65.97	6486753.87	2544.82	25.3	25.76
+PC官网	3714	2450	65.97	6340651.09	2588.02	24.73	24.76
+小程序	3698	2498	67.55	6421420.2	2570.62	25.04	24.65
+门店	3724	2469	66.3	6394637.61	2589.97	24.94	24.83

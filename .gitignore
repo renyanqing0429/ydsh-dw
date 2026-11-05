@@ -22,3 +22,4 @@ node_modules/
 
 # SSH 私钥（严禁提交）
 .ssh-key/
+dashboard/_shot.png

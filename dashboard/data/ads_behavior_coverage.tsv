@@ -1,0 +1,5 @@
+ads_behavior_coverage.behavior_type	ads_behavior_coverage.event_cnt	ads_behavior_coverage.event_share_pct	ads_behavior_coverage.uv	ads_behavior_coverage.uv_rate_pct	ads_behavior_coverage.avg_events_uv	ads_behavior_coverage.total_user_cnt	ads_behavior_coverage.funnel_valid	ads_behavior_coverage.remark
+加购	8286	13.81	1000	100.0	8.29	1000	0	UV 覆盖率 100%，与浏览用户完全重合，不构成独立环节
+收藏	5585	9.31	995	99.5	5.61	1000	0	UV 995/1000，仅 5 人未收藏，区分度不足
+浏览	34160	56.93	1000	100.0	34.16	1000	0	UV 覆盖全部用户，漏斗首步无筛选作用
+购买	11969	19.95	1000	100.0	11.97	1000	0	UV 覆盖率 100% 且次数(11,969)高于加购(8,286)，违反漏斗单调性

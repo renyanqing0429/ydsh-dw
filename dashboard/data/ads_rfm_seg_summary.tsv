@@ -1,0 +1,9 @@
+ads_rfm_seg_summary.rfm_seg	ads_rfm_seg_summary.user_cnt	ads_rfm_seg_summary.user_share	ads_rfm_seg_summary.avg_recency	ads_rfm_seg_summary.avg_frequency	ads_rfm_seg_summary.avg_monetary	ads_rfm_seg_summary.gmv	ads_rfm_seg_summary.gmv_share	ads_rfm_seg_summary.gmv_per_user
+一般价值客户	34	3.4	8.0	11.85	24146.39	820977.1099999999	3.2	24146.39
+一般保持客户	40	4.0	51.2	11.5	24239.93	969597.2700000001	3.78	24239.93
+一般发展客户	170	17.0	8.1	7.79	18932.78	3218572.1399999997	12.55	18932.78
+一般挽留客户	356	35.6	61.1	7.46	18548.41	6603233.700000004	25.75	18548.41
+重要价值客户	164	16.4	8.3	13.87	36652.61	6011028.55	23.44	36652.61
+重要保持客户	162	16.2	41.3	13.16	35549.4	5759002.629999999	22.46	35549.4
+重要发展客户	32	3.2	9.2	9.84	30372.84	971930.91	3.79	30372.84
+重要挽留客户	42	4.2	45.5	9.57	30693.34	1289120.46	5.03	30693.34

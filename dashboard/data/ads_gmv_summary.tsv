@@ -1,0 +1,2 @@
+ads_gmv_summary.stat_start	ads_gmv_summary.stat_end	ads_gmv_summary.stat_days	ads_gmv_summary.order_cnt	ads_gmv_summary.valid_order_cnt	ads_gmv_summary.valid_rate	ads_gmv_summary.gmv	ads_gmv_summary.avg_daily_gmv	ads_gmv_summary.aov	ads_gmv_summary.buyer_cnt	ads_gmv_summary.arpu	ads_gmv_summary.discount_total	ads_gmv_summary.discount_rate	ads_gmv_summary.gmv_all	ads_gmv_summary.aov_all
+2024-01-01	2024-12-31	366	15000	9966	66.44	2.564346277E7	70064.11	2573.09	1000	25643.46	3542154.34	12.14	3.847043495E7	2564.7
