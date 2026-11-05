@@ -37,7 +37,7 @@
 | 第 1 周 | 环境搭建、Git 规范、ODS 导入、质量预评估、清洗（缺失值/重复值） | ✅ 已完成 |
 | 第 2 周 | 清洗（枚举/异常/格式）、四层架构设计、DWD 维度建模与加载、探索性分析 | ✅ 已完成 |
 | 第 2 周（补充） | DWS 汇总层（4 张日汇总表）、ADS 应用层（7 张应用表） | ✅ 已完成 |
-| 第 2 周（深化） | 口径下沉 DWD（`pay_amount_valid`）、ADS 扩至 11 张（RFM 2 张 + 行为覆盖 1 张 + 履约漏斗 1 张） | ✅ 已完成 |
+| 第 2 周（深化） | 口径下沉 DWD（`pay_amount_valid`）、ADS 扩至 13 张（RFM 2 + 行为覆盖 1 + 履约漏斗 1 + 单品榜 1 + 门店坪效 1） | ✅ 已完成 |
 | 第 3 周+ | 商品/门店/行为主题汇总、RFM 与履约漏斗、Superset 大屏 | ⏳ 待开始 |
 | 后续 | Superset 可视化大屏、项目答辩 | ⏳ 待开始 |
 
@@ -126,7 +126,8 @@ ydsh-dw/
 │   │   └── create_dws_load.sql  # DWS 汇总层：订单/用户/品类/渠道 4 张日汇总表
 │   ├── ads/
 │   │   ├── create_ads_load.sql  # ADS 应用层：总览/趋势/品类/渠道/省份/分层/会员 7 张表
-│   │   └── rfm_funnel.sql       # ADS 深化：RFM 明细/客群 + 行为覆盖 + 订单履约漏斗 4 张表
+│   │   ├── rfm_funnel.sql       # ADS 深化：RFM 明细/客群 + 行为覆盖 + 订单履约漏斗 4 张表
+│   │   └── product_store.sql    # ADS 商品/门店：单品销售榜 + 门店坪效 2 张表
 │   └── analysis/
 │       └── exploratory_analysis.sql  # 探索性分析（第 2 周）
 ├── tools/

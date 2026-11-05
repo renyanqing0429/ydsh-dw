@@ -11,7 +11,7 @@
 | 团队成员 | 任宴庆（项目经理 / 数据工程师 / 数据分析师，第 2 周全流程执行） |
 | 使用场景 | 任务拆解、HiveQL 脚本编写与调试、数据建模设计、质量统计口径设计、分析结果解读、文档撰写 |
 | 协同周期 | 2026-11-02（第 2 周） |
-| 协同记录数 | 12 条 |
+| 协同记录数 | 13 条 |
 | 项目仓库 | GitHub `github.com/renyanqing0429/ydsh-dw` ；Gitee `gitee.com/ren-yanqing/ydsh-dw` |
 
 ## 二、使用的工具与模型
@@ -40,6 +40,7 @@
 | 10 | 分析解读 | 「探索性分析结果怎么落到经营结论」 | 输出 14 组分析（KPI、品类/省份/门店/渠道分布、月度趋势、用户分层、行为构成），并总结 8 条发现 | 人工识别出两处**反直觉结果**并标为数据质量问题而非结论：① 会员等级与消费力不相关；② 行为事件不构成真实漏斗 | `sql/analysis/exploratory_analysis.sql`、`探索性分析简报.md` |
 | 11 | 架构补齐 | 「任务书总述要求 ODS→DWD→DWS→ADS 四层，现在只到 DWD，补上 DWS 和 ADS」 | 产出 `sql/dws/create_dws_load.sql`（订单/用户/品类/渠道 4 张日汇总表，5,124 行）与 `sql/ads/create_ads_load.sql`（总览/趋势/品类/渠道/省份/分层/会员 7 张应用表，401 行），并给出四层 GMV 对账（差异 0） | 人工否掉了 AI 第一版的两个做法：① 用日汇总 `buyer_cnt` 相加算 ARPU（14,675 人次 ≠ 1,000 人，差 14.7 倍）；② 沿用 5 万/2 万分层阈值（有效订单口径下只剩 7 人达标）。改为 DWD 全周期去重取数 + 按 P80/P40 重标定 3.5 万/2 万 | `sql/dws/create_dws_load.sql`、`sql/ads/create_ads_load.sql`、`执行结果/13~14_*.txt` |
 | 12 | 口径治理 + 分析深化 | 「① 上一轮只是双口径并列规避，无效订单的 `pay_amount` 还在污染源头，从 DWD 修掉；② 用户只按金额分了三段，补 RFM；③ 之前说要做履约漏斗，一并落地」 | ① 在 `dwd_order` 增 `pay_amount_valid` / `discount_amount_valid`，加载时无效订单置 0，DWS 四张表改读有效字段；② 用 `NTILE(5)` 做 R/F/M 五分位打分，组合成 8 类客群；③ 建 `ads_order_funnel`，用「原始金额 − 有效金额」直接算每步流失 | 人工否掉了 AI 第一版的行为转化漏斗：实测 60,000 条行为只落在 58,132 个会话（1.03 条/会话），四类行为 UV 为 1000/1000/995/1000、购买次数反超加购，**不满足漏斗单调性**。改为输出「行为构成与覆盖」并打 `funnel_valid=0`，把「数据不可用」本身作为结论。另要求保留原始 `pay_amount`，否则流失金额算不出来 | `sql/ads/rfm_funnel.sql`、`执行结果/15_RFM与漏斗结果.txt`、ADS 11 张表 |
+| 13 | 指标补齐 | 「经营会上必问的两个问题还答不了：到底哪几个单品在卖？门店是开得多还是开得好？把单品榜和门店坪效补上」 | ① `ads_product_rank`：600 个 SKU 按销售额排名，带帕累托 A/B/C 分层、品类内排名、价格带；② `ads_store_efficiency`：LEFT JOIN `dim_store.area` 算坪效，按四分位分高效/中效/低效 | 人工否掉了 AI 第一版用 `PERCENTILE(col,0.75)` 直接分层 —— 它是聚合函数，与同层窗口函数混用会报 `not a GROUP BY expression`，改用 `NTILE(4)`；另要求门店必须 `LEFT JOIN`，否则 0 单门店被筛掉，「低效门店」正好漏掉最该看的对象 | `sql/ads/product_store.sql`、`执行结果/16_商品榜单与门店坪效结果.txt` |
 
 ## 四、产出成果清单
 
@@ -59,6 +60,7 @@
 | 12 | ADS 应用层 | `sql/ads/create_ads_load.sql` | 7 张表 401 行，四层 GMV 对账差异 0 |
 | 13 | ADS 深化分析 | `sql/ads/rfm_funnel.sql` | RFM 明细 1,000 + 客群 8 + 行为覆盖 4 + 履约漏斗 3，ADS 合计 11 张 1,401 行 |
 | 14 | 口径下沉改造 | `sql/dwd/create_dwd.sql`、`load_dwd.sql`、`sql/dws/create_dws_load.sql` | 新增有效金额字段，DWS 改读后四层 GMV 仍为 25,643,462.77，差异 0 |
+| 15 | ADS 商品/门店 | `sql/ads/product_store.sql` | 单品榜 600 + 门店坪效 60，ADS 合计 13 张 2,061 行 |
 
 ## 五、问题与解决
 
@@ -72,6 +74,7 @@
 | 6 | 封顶后出现 `discount_amount > pay_amount` 残留 280 行 | 优惠金额钳制写在了支付金额封顶之前 | 调整语句顺序：先封顶支付金额，再钳制优惠金额 |
 | 7 | `INSERT OVERWRITE TABLE ... WITH agg AS (...) SELECT` 报 `cannot recognize input near 'WITH'` | Hive 4 不支持「INSERT 后接 WITH」的写法（CTE 只能出现在查询开头） | 聚合子查询在三个 `UNION ALL` 分支内联；表仅 1.5 万行，重复扫描代价可忽略 |
 | 8 | 行为转化漏斗做不出来 | 埋点是独立随机生成：会话人均 1.03 条，四类行为 UV 覆盖率≈100%，购买次数反超加购 | 不硬凑转化率，改建 `ads_behavior_coverage` 并置 `funnel_valid = 0`；漏斗改到订单状态链路上 |
+| 9 | `PERCENTILE(gmv_per_sqm, 0.75)` 与窗口函数同层报 `not a GROUP BY expression` | Hive 的 `PERCENTILE` 是聚合函数，一旦出现在 SELECT 里，整条语句就被当作聚合查询，其余非聚合列必须进 GROUP BY | 改用纯窗口函数 `NTILE(4)` 做四分位；60 家门店正好每档 15 家，语义等价且无需额外子查询 |
 
 ## 六、反思与总结
 
@@ -100,6 +103,6 @@
 
 ### 6.4 下一步计划
 
-1. ~~第 3 周：落地 DWS 汇总层与 ADS 应用层指标表~~ —— 已提前完成（DWS 4 张、ADS 11 张）。
+1. ~~第 3 周：落地 DWS 汇总层与 ADS 应用层指标表~~ —— 已提前完成（DWS 4 张、ADS 13 张）。
 2. 引入拉链表处理维度缓慢变化（`dim_user_hist`）。
 3. 输出第 2 周答辩 PPT 与 Superset 看板原型。

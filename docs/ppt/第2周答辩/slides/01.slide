@@ -1,0 +1,23 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0, position: 'relative' }}>
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: 1280, height: 6, background: '#1E4FA8' }} />
+    <Box style={{ position: 'absolute', left: 60, top: 168, width: 4, height: 220, background: '#1E4FA8' }} />
+    <Box style={{ padding: '160px 60px 0 92px', flexDirection: 'column' }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1E4FA8', letterSpacing: 3 }}>
+            WEEK 02 · 阶段答辩
+        </Text>
+        <Text style={{ fontSize: 64, fontWeight: 'bold', color: '#1A2230', lineHeight: 1.25, marginTop: 24 }}>
+            云购生活新零售企业数仓
+        </Text>
+        <Text style={{ fontSize: 28, color: '#4A5568', lineHeight: 1.4, marginTop: 18 }}>
+            数据清洗进阶 · Hive 四层建模 · 探索性分析
+        </Text>
+        <Box style={{ width: 1096, height: 1, background: '#D6DCE5', marginTop: 44 }} />
+        <Box style={{ flexDirection: 'row', marginTop: 24, alignItems: 'center' }}>
+            <Text style={{ fontSize: 16, color: '#1A2230' }}>任宴庆</Text>
+            <Text style={{ fontSize: 16, color: '#8B97A8', marginLeft: 12, marginRight: 12 }}>|</Text>
+            <Text style={{ fontSize: 16, color: '#4A5568' }}>计算与智能学院 · 大数据技术</Text>
+            <Text style={{ fontSize: 16, color: '#8B97A8', marginLeft: 12, marginRight: 12 }}>|</Text>
+            <Text style={{ fontSize: 16, color: '#4A5568' }}>2026-11-05</Text>
+        </Box>
+    </Box>
+</Slide>

@@ -1,0 +1,65 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>四层对账与口径下沉</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>02 · Data Warehouse</Text>
+    </Box>
+    <Box style={{ padding: '26px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row' }}>
+            <Box style={{ width: 660, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginBottom: 14 }}>同一口径下，五处 GMV 完全一致</Text>
+                <Box style={{ height: 330 }}>
+                    <Table
+                        style={{ width: '100%', height: '100%' }}
+                        defaultTextStyle={{ fontSize: 17, color: '#1A2230', textAlign: 'center' }}
+                        defaultCellStyle={{ border: { bottom: { width: 1, color: '#E5E7EB' } } }}
+                        cells={[
+                            [
+                                { text: '层 / 表', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: 'GMV（有效订单口径）', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '与 DWD 差异', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                            ],
+                            ['DWD · dwd_order', '25,643,462.77', '基准'],
+                            ['DWS · dws_order_1d', '25,643,462.77', '0'],
+                            ['ADS · ads_daily_trend', '25,643,462.77', '0'],
+                            ['ADS · ads_gmv_summary', '25,643,462.77', '0'],
+                            ['ADS · ads_rfm_seg_summary', '25,643,462.77', '0'],
+                            ['ADS · ads_store_efficiency', '25,643,462.77', '0'],
+                        ]}
+                    />
+                </Box>
+            </Box>
+            <Box style={{ width: 460, paddingLeft: 40, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>口径下沉到 DWD</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.7, marginTop: 12 }}>
+                    源数据里 5,034 笔取消/退款/待支付订单同样写了 pay_amount，合计 1,282.70 万。上一轮靠 ADS 每条查询自己写 CASE 兜，少写一处就多一处偏差。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.7, marginTop: 12 }}>
+                    本轮在 dwd_order 增 pay_amount_valid 与 discount_amount_valid，无效订单置 0；原始字段保留，专门用来算「漏了多少钱」。
+                </Text>
+                <Box style={{ background: '#E8EFF8', padding: '14px 16px', marginTop: 18, flexDirection: 'column' }}>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontSize: 15, color: '#4A5568' }}>全订单口径</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568' }}>3,847.04 万</Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1A2230' }}>有效订单口径（主口径）</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#1A2230' }}>2,564.35 万</Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
+                        <Text style={{ fontSize: 15, color: '#D9534F' }}>差额即流失金额</Text>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#D9534F' }}>1,282.70 万</Text>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 26 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                对账的意义：五处数字一致，说明「明细 → 汇总 → 应用」没有丢行、没有重复计数；口径下沉则保证换个人写 SQL 也不会算歪。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>09 / 15</Text>
+    </Box>
+</Slide>

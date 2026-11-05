@@ -1,0 +1,12 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ flexDirection: 'row', padding: '238px 60px 0 60px', alignItems: 'center' }}>
+        <Text style={{ fontSize: 120, fontWeight: 'bold', color: '#1E4FA8', lineHeight: 1 }}>03</Text>
+        <Box style={{ width: 1, height: 130, background: '#D6DCE5', marginLeft: 48, marginRight: 48 }} />
+        <Box style={{ flexDirection: 'column' }}>
+            <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1.25 }}>探索性分析</Text>
+            <Text style={{ fontSize: 18, color: '#4A5568', marginTop: 16 }}>
+                经营 KPI · 结构分布 · RFM 客群 · 履约漏斗 · 单品与坪效
+            </Text>
+        </Box>
+    </Box>
+</Slide>

@@ -1,0 +1,43 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>清洗策略：三个判断</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>01 · Data Cleaning</Text>
+    </Box>
+    <Box style={{ padding: '28px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row', gap: 30 }}>
+            <Box style={{ width: 366, borderTop: '2px solid #1E4FA8', paddingTop: 20, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>Ⅰ</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230', marginTop: 10 }}>枚举：先穷举，再映射</Text>
+                <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.65, marginTop: 18 }}>
+                    6 个枚举字段先跑 distinct 拿到全部取值（gender 8 种、order_status 12 种），再逐条写 case when；映射关系独立成 5 张 dim_*_code 表，新增一种脏值只需 INSERT 一行。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#1A2230', marginTop: 18, fontWeight: 'bold' }}>未命中取值 = 0</Text>
+            </Box>
+            <Box style={{ width: 366, borderTop: '2px solid #1E4FA8', paddingTop: 20, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>Ⅱ</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230', marginTop: 10 }}>异常：不拿 P99 当阈值</Text>
+                <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.65, marginTop: 18 }}>
+                    原始金额 P99 = 563 万，已被注入的超大脏值污染，按 P99 截断会放过真正的异常。改用「业务阈值 1 万判定 + 正常区间 P95 = 4,745.32 缩尾」，并打标 is_amount_capped。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#1A2230', marginTop: 18, fontWeight: 'bold' }}>封顶 304 行，可追溯可还原</Text>
+            </Box>
+            <Box style={{ width: 366, borderTop: '2px solid #1E4FA8', paddingTop: 20, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>Ⅲ</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1A2230', marginTop: 10 }}>口径：先分清有效单</Text>
+                <Text style={{ fontSize: 19, color: '#4A5568', lineHeight: 1.65, marginTop: 18 }}>
+                    5,034 笔取消/退款/待支付订单同样写了 pay_amount，合计 1,282.70 万。DWD 加载时新增 pay_amount_valid 并置 0，下游不再各自写 CASE 兜口径。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#1A2230', marginTop: 18, fontWeight: 'bold' }}>四层 GMV 差异 = 0</Text>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 34 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                三个判断的共同点：把口径写进数据与脚本，而不是留在人的记忆里 —— 换个人跑、隔一周跑，结果都一致。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>05 / 15</Text>
+    </Box>
+</Slide>

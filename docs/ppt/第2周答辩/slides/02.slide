@@ -1,0 +1,41 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ flexDirection: 'row', padding: '120px 60px 0 60px' }}>
+        <Box style={{ width: 240, flexDirection: 'column' }}>
+            <Text style={{ fontSize: 48, fontWeight: 'bold', color: '#1A2230', lineHeight: 1.2 }}>目录</Text>
+            <Text style={{ fontSize: 15, color: '#1E4FA8', letterSpacing: 3, marginTop: 12 }}>CONTENTS</Text>
+        </Box>
+        <Box style={{ width: 1, height: 420, background: '#D6DCE5', marginLeft: 20, marginRight: 56 }} />
+        <Box style={{ flex: 1, flexDirection: 'column' }}>
+            <Box style={{ flexDirection: 'row', height: 140, alignItems: 'flex-start', borderBottom: '1px solid #E5E7EB', paddingTop: 4 }}>
+                <Text style={{ width: 84, fontSize: 32, fontWeight: 'bold', color: '#1E4FA8' }}>01</Text>
+                <Box style={{ flex: 1, flexDirection: 'column' }}>
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>数据清洗进阶</Text>
+                    <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+                        五类脏数据修复率、枚举与异常值处理策略、编码映射表设计
+                    </Text>
+                </Box>
+                <Text style={{ width: 90, fontSize: 15, color: '#8B97A8', textAlign: 'right' }}>P03 — 05</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', height: 140, alignItems: 'flex-start', borderBottom: '1px solid #E5E7EB', paddingTop: 26 }}>
+                <Text style={{ width: 84, fontSize: 32, fontWeight: 'bold', color: '#1E4FA8' }}>02</Text>
+                <Box style={{ flex: 1, flexDirection: 'column' }}>
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>四层数仓建模</Text>
+                    <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+                        ODS → DWD → DWS → ADS 分层设计、星型模型、分区与分桶、四层对账
+                    </Text>
+                </Box>
+                <Text style={{ width: 90, fontSize: 15, color: '#8B97A8', textAlign: 'right' }}>P06 — 09</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', height: 140, alignItems: 'flex-start', paddingTop: 26 }}>
+                <Text style={{ width: 84, fontSize: 32, fontWeight: 'bold', color: '#1E4FA8' }}>03</Text>
+                <Box style={{ flex: 1, flexDirection: 'column' }}>
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#1A2230' }}>探索性分析</Text>
+                    <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6, marginTop: 10 }}>
+                        经营 KPI 与结构分布、RFM 八客群、订单履约漏斗、单品与门店坪效
+                    </Text>
+                </Box>
+                <Text style={{ width: 90, fontSize: 15, color: '#8B97A8', textAlign: 'right' }}>P10 — 14</Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

@@ -1,0 +1,73 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>结论、局限与下一步</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>03 · Exploratory Analysis</Text>
+    </Box>
+    <Box style={{ padding: '26px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row' }}>
+            <Box style={{ width: 640, flexDirection: 'column', paddingRight: 40 }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginBottom: 6 }}>四条结论</Text>
+                <Box style={{ flexDirection: 'row', borderTop: '1px solid #E5E7EB', paddingTop: 14, paddingBottom: 14, borderBottom: '1px solid #E5E7EB' }}>
+                    <Text style={{ width: 46, fontSize: 20, fontWeight: 'bold', color: '#1E4FA8' }}>01</Text>
+                    <Text style={{ flex: 1, fontSize: 18, color: '#1A2230', lineHeight: 1.6 }}>
+                        清洗：五类脏数据 72,877 → 193，修复率 <span style={{ fontWeight: 'bold', color: '#1E4FA8' }}>99.74%</span>，剔除邮箱口径为 100.00%。
+                    </Text>
+                </Box>
+                <Box style={{ flexDirection: 'row', paddingTop: 14, paddingBottom: 14, borderBottom: '1px solid #E5E7EB' }}>
+                    <Text style={{ width: 46, fontSize: 20, fontWeight: 'bold', color: '#1E4FA8' }}>02</Text>
+                    <Text style={{ flex: 1, fontSize: 18, color: '#1A2230', lineHeight: 1.6 }}>
+                        建模：DWS 4 张、ADS 13 张全部实测落地，五处 GMV 对账差异 <span style={{ fontWeight: 'bold', color: '#1E4FA8' }}>0</span>。
+                    </Text>
+                </Box>
+                <Box style={{ flexDirection: 'row', paddingTop: 14, paddingBottom: 14, borderBottom: '1px solid #E5E7EB' }}>
+                    <Text style={{ width: 46, fontSize: 20, fontWeight: 'bold', color: '#1E4FA8' }}>03</Text>
+                    <Text style={{ flex: 1, fontSize: 18, color: '#1A2230', lineHeight: 1.6 }}>
+                        经营：有效订单率 66.44%，全链路成交率 37.61%，支付前流失 <span style={{ fontWeight: 'bold', color: '#D9534F' }}>1,282.70 万</span>。
+                    </Text>
+                </Box>
+                <Box style={{ flexDirection: 'row', paddingTop: 14 }}>
+                    <Text style={{ width: 46, fontSize: 20, fontWeight: 'bold', color: '#1E4FA8' }}>04</Text>
+                    <Text style={{ flex: 1, fontSize: 18, color: '#1A2230', lineHeight: 1.6 }}>
+                        运营：RFM 八群可分层触达；门店应按小店模型复制 —— 坪效相差 <span style={{ fontWeight: 'bold', color: '#D9534F' }}>4.5 倍</span>，GMV 却只差 8.7%。
+                    </Text>
+                </Box>
+            </Box>
+            <Box style={{ flex: 1, flexDirection: 'column', paddingLeft: 40, borderLeft: '1px solid #E5E7EB' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginBottom: 6 }}>三条局限（不藏）</Text>
+                <Box style={{ flexDirection: 'column', gap: 14, marginTop: 8 }}>
+                    <Box style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 17, color: '#8B97A8', width: 28 }}>①</Text>
+                        <Text style={{ flex: 1, fontSize: 16, color: '#4A5568', lineHeight: 1.65 }}>
+                            明细金额（单价×数量×折扣）与订单支付金额未对齐，品类与单品只能比占比，不能与 GMV 交叉校验。
+                        </Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 17, color: '#8B97A8', width: 28 }}>②</Text>
+                        <Text style={{ flex: 1, fontSize: 16, color: '#4A5568', lineHeight: 1.65 }}>
+                            行为埋点不可用：会话人均 1.03 条、四类行为 UV 覆盖率≈100%，做不出转化漏斗，只能做覆盖分布。
+                        </Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 17, color: '#8B97A8', width: 28 }}>③</Text>
+                        <Text style={{ flex: 1, fontSize: 16, color: '#4A5568', lineHeight: 1.65 }}>
+                            RFM 用五分位切档，保证人数均衡但业务解释弱；「多久算流失」需业务给定口径后改为固定阈值。
+                        </Text>
+                    </Box>
+                </Box>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginTop: 26, marginBottom: 6 }}>下一步</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.7 }}>
+                    第 3 周引入拉链表处理维度缓慢变化（dim_user_hist）；补商品与门店主题的 DWS；把 13 张 ADS 表接上 Superset 看板。
+                </Text>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 26 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                一句话总结：这周把「数据可信」和「口径唯一」这两件事做实了，分析结论才有资格被拿去开会。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>14 / 15</Text>
+    </Box>
+</Slide>

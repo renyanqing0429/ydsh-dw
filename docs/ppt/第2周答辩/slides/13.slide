@@ -1,0 +1,72 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>单品结构与门店坪效</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>03 · Exploratory Analysis</Text>
+    </Box>
+    <Box style={{ padding: '26px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row' }}>
+            <Box style={{ width: 470, flexDirection: 'column', paddingRight: 40 }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>600 个 SKU，没有爆款</Text>
+                <Box style={{ flexDirection: 'column', marginTop: 18 }}>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', borderBottom: '1px solid #E5E7EB', paddingBottom: 16 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>192</Text>
+                        <Text style={{ fontSize: 16, color: '#4A5568', marginLeft: 10, marginBottom: 4 }}>个 SKU 撑起 50% 销售额</Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', borderBottom: '1px solid #E5E7EB', paddingTop: 18, paddingBottom: 16 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>408</Text>
+                        <Text style={{ fontSize: 16, color: '#4A5568', marginLeft: 10, marginBottom: 4 }}>个 SKU 才凑出 80% 销售额</Text>
+                    </Box>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', paddingTop: 18 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>0.59</Text>
+                        <Text style={{ fontSize: 16, color: '#4A5568', marginLeft: 4, marginBottom: 4 }}>%</Text>
+                        <Text style={{ fontSize: 16, color: '#4A5568', marginLeft: 10, marginBottom: 4 }}>榜首单品占比（前 10 名合计 4.71%）</Text>
+                    </Box>
+                </Box>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.7, marginTop: 22 }}>
+                    好处是不依赖单品、抗风险；代价是采购与库存极度分散。77% 的 SKU 集中在 2000 元以上价格带，贡献 74.73% 销售额。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, flexDirection: 'column', paddingLeft: 40, borderLeft: '1px solid #E5E7EB' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>门店坪效：大店没有卖出更多钱</Text>
+                <Box style={{ height: 250, marginTop: 12 }}>
+                    <Table
+                        style={{ width: '100%', height: '100%' }}
+                        defaultTextStyle={{ fontSize: 16, color: '#1A2230', textAlign: 'center' }}
+                        defaultCellStyle={{ border: { bottom: { width: 1, color: '#E5E7EB' } } }}
+                        cells={[
+                            [
+                                { text: '效率档', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '门店数', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '平均面积（㎡）', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '平均 GMV', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '平均坪效（元/㎡）', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                            ],
+                            ['高效（前 25%）', '15', '174.5', '441,321.49', { text: '2,682.28', textStyle: { bold: true } }],
+                            ['中效（25~75%）', '30', '454.8', '431,188.85', '1,021.34'],
+                            ['低效（后 25%）', '15', '693.9', '405,865.00', { text: '591.87', textStyle: { bold: true } }],
+                        ]}
+                    />
+                </Box>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 26 }}>
+                    <Text style={{ fontSize: 76, fontWeight: 'bold', color: '#D9534F', lineHeight: 1 }}>4.5</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#D9534F', marginLeft: 6, marginBottom: 8 }}>倍</Text>
+                    <Text style={{ fontSize: 17, color: '#4A5568', marginLeft: 16, marginBottom: 10 }}>
+                        高效组与低效组坪效差距
+                    </Text>
+                </Box>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.7, marginTop: 12 }}>
+                    两组平均 GMV 只差 8.7%（44.13 万 vs 40.59 万），面积却差 4 倍 —— 换个分母，原先「门店表现均衡」的结论直接反过来。
+                </Text>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 20 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                动作建议：新店优先复制 120~180㎡ 的小店模型；700㎡ 以上的大店要么加体验业态提客单，要么缩面积或转仓店一体。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>13 / 15</Text>
+    </Box>
+</Slide>

@@ -1,0 +1,62 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>五类脏数据修复率</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>01 · Data Cleaning</Text>
+    </Box>
+    <Box style={{ padding: '24px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+            <Box style={{ flexDirection: 'column', width: 340 }}>
+                <Text style={{ fontSize: 56, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>72,877</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 10 }}>清洗前问题总数（处）</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', width: 340 }}>
+                <Text style={{ fontSize: 56, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>193</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 10 }}>清洗后残留（全部为邮箱空值）</Text>
+            </Box>
+            <Box style={{ flexDirection: 'column', flex: 1 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                    <Text style={{ fontSize: 56, fontWeight: 'bold', color: '#D9534F', lineHeight: 1 }}>99.74</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#D9534F', marginLeft: 4, marginBottom: 8 }}>%</Text>
+                </Box>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 10 }}>整体修复率 · 剔除邮箱口径为 100.00%</Text>
+            </Box>
+        </Box>
+        <Box style={{ height: 300, marginTop: 26 }}>
+            <Table
+                style={{ width: '100%', height: '100%' }}
+                defaultTextStyle={{ fontSize: 17, color: '#1A2230', textAlign: 'center' }}
+                defaultCellStyle={{ border: { bottom: { width: 1, color: '#E5E7EB' } } }}
+                cells={[
+                    [
+                        { text: '脏数据类别', textStyle: { bold: true, color: '#1A2230' }, cellStyle: { background: { color: '#E8EFF8' } } },
+                        { text: '清洗前', textStyle: { bold: true, color: '#1A2230' }, cellStyle: { background: { color: '#E8EFF8' } } },
+                        { text: '清洗后', textStyle: { bold: true, color: '#1A2230' }, cellStyle: { background: { color: '#E8EFF8' } } },
+                        { text: '修复率', textStyle: { bold: true, color: '#1A2230' }, cellStyle: { background: { color: '#E8EFF8' } } },
+                        { text: '处理方式', textStyle: { bold: true, color: '#1A2230' }, cellStyle: { background: { color: '#E8EFF8' } } },
+                    ],
+                    ['枚举不规范', '60,493', '0', '100.00%', '6 个枚举字段统一到中文标准值'],
+                    ['格式错误', '8,217', '0', '100.00%', '日期 / 手机号 / 行为时间格式统一'],
+                    ['数值异常', '3,312', '0', '100.00%', '负值取绝对值，超大值 P95 缩尾'],
+                    ['重复值', '600', '0', '100.00%', '按 order_id 保留最新一条'],
+                    ['缺失值', '255', '193', '24.31%', '邮箱 193 条保留空值并打标'],
+                    [
+                        { text: '合计', textStyle: { bold: true } },
+                        { text: '72,877', textStyle: { bold: true } },
+                        { text: '193', textStyle: { bold: true } },
+                        { text: '99.74%', textStyle: { bold: true, color: '#1E4FA8' } },
+                        { text: '残留全部为业务可选字段', textStyle: { bold: true } },
+                    ],
+                ]}
+            />
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '12px 20px', marginTop: 22 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                残留的 193 处不是漏洗：邮箱是业务可选字段，策略为保留空值 + 打 is_email_missing 标记，剔除该口径后缺失值修复率为 100.00%。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>04 / 15</Text>
+    </Box>
+</Slide>

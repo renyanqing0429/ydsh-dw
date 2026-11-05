@@ -1,0 +1,72 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>RFM 客群与履约漏斗</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>03 · Exploratory Analysis</Text>
+    </Box>
+    <Box style={{ padding: '24px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row' }}>
+            <Box style={{ width: 640, flexDirection: 'column', paddingRight: 40 }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230', marginBottom: 10 }}>RFM 八客群：谁快流失、谁值得追第二单</Text>
+                <Box style={{ height: 348 }}>
+                    <Table
+                        style={{ width: '100%', height: '100%' }}
+                        defaultTextStyle={{ fontSize: 16, color: '#1A2230', textAlign: 'center' }}
+                        defaultCellStyle={{ border: { bottom: { width: 1, color: '#E5E7EB' } } }}
+                        cells={[
+                            [
+                                { text: '客群', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '人数', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '人数占比', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: 'GMV 占比', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                                { text: '人均消费', textStyle: { bold: true }, cellStyle: { background: { color: '#E8EFF8' } } },
+                            ],
+                            ['重要价值客户', '164', '16.4%', { text: '23.44%', textStyle: { bold: true } }, '36,652.61'],
+                            ['重要保持客户', '162', '16.2%', { text: '22.46%', textStyle: { bold: true } }, '35,549.40'],
+                            ['一般挽留客户', '356', '35.6%', { text: '25.75%', textStyle: { bold: true } }, '18,548.41'],
+                            ['一般发展客户', '170', '17.0%', '12.55%', '18,932.78'],
+                            ['重要挽留客户', '42', '4.2%', '5.03%', '30,693.34'],
+                            ['重要发展客户', '32', '3.2%', '3.79%', '30,372.84'],
+                            ['一般保持客户', '40', '4.0%', '3.78%', '24,239.93'],
+                            ['一般价值客户', '34', '3.4%', '3.20%', '24,146.39'],
+                        ]}
+                    />
+                </Box>
+            </Box>
+            <Box style={{ flex: 1, flexDirection: 'column', paddingLeft: 40, borderLeft: '1px solid #E5E7EB' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>订单履约漏斗：钱漏在哪一步</Text>
+                <Box style={{ flexDirection: 'column', marginTop: 16 }}>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ fontSize: 16, color: '#1A2230' }}>提交订单</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1A2230' }}>15,000 单 · 3,847.04 万</Text>
+                    </Box>
+                    <Box style={{ width: 460, height: 20, background: '#1E4FA8', marginTop: 8 }} />
+                    <Text style={{ fontSize: 14, color: '#D9534F', marginTop: 8 }}>
+                        流失 5,034 单 · 1,282.70 万（待支付 2,116 / 已取消 2,101 / 退款中 817）
+                    </Text>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 16 }}>
+                        <Text style={{ fontSize: 16, color: '#1A2230' }}>支付成功 66.44%</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1A2230' }}>9,966 单 · 2,564.35 万</Text>
+                    </Box>
+                    <Box style={{ width: 306, height: 20, background: '#3D7BD9', marginTop: 8 }} />
+                    <Text style={{ fontSize: 14, color: '#D9534F', marginTop: 8 }}>
+                        再流失 4,324 单 · 1,113.12 万（已支付但未完成履约）
+                    </Text>
+                    <Box style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 16 }}>
+                        <Text style={{ fontSize: 16, color: '#1A2230' }}>履约完成 37.61%</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#1A2230' }}>5,642 单 · 1,451.23 万</Text>
+                    </Box>
+                    <Box style={{ width: 173, height: 20, background: '#8B97A8', marginTop: 8 }} />
+                </Box>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 22 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                重要价值 + 重要保持 326 人（32.6%）贡献 45.9% GMV；一般挽留 356 人（35.6%）仍贡献 25.75%，人均 1.85 万 —— 不是没钱，是好久没来。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>12 / 15</Text>
+    </Box>
+</Slide>

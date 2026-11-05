@@ -1,0 +1,67 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>四层架构与表规模</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>02 · Data Warehouse</Text>
+    </Box>
+    <Box style={{ padding: '26px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row', borderBottom: '1px solid #E5E7EB', paddingBottom: 8 }}>
+            <Text style={{ width: 100, fontSize: 15, color: '#8B97A8' }}>层级</Text>
+            <Text style={{ width: 330, fontSize: 15, color: '#8B97A8' }}>定位与职责</Text>
+            <Text style={{ flex: 1, fontSize: 15, color: '#8B97A8' }}>本层落地表</Text>
+            <Text style={{ width: 190, fontSize: 15, color: '#8B97A8', textAlign: 'right' }}>表数 · 行数</Text>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', height: 92, borderBottom: '1px solid #E5E7EB' }}>
+            <Text style={{ width: 100, fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>ODS</Text>
+            <Box style={{ width: 330, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>贴源层</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>原样落库，不做任何加工</Text>
+            </Box>
+            <Text style={{ flex: 1, fontSize: 17, color: '#4A5568', lineHeight: 1.5 }}>
+                ods_order / ods_user / ods_product / ods_store / ods_order_item / ods_user_behavior
+            </Text>
+            <Text style={{ width: 190, fontSize: 17, color: '#1A2230', textAlign: 'right' }}>6 张 · 114,809 行</Text>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', height: 92, borderBottom: '1px solid #E5E7EB' }}>
+            <Text style={{ width: 100, fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>DWD</Text>
+            <Box style={{ width: 330, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>明细层</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>清洗 + 标准化 + 星型模型</Text>
+            </Box>
+            <Text style={{ flex: 1, fontSize: 17, color: '#4A5568', lineHeight: 1.5 }}>
+                4 张维度表（dim_user / product / store / date）+ 3 张事实表（dwd_order / order_item / user_behavior）
+            </Text>
+            <Text style={{ width: 190, fontSize: 17, color: '#1A2230', textAlign: 'right' }}>7 张 · 114,575 行</Text>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', height: 92, borderBottom: '1px solid #E5E7EB' }}>
+            <Text style={{ width: 100, fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>DWS</Text>
+            <Box style={{ width: 330, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>汇总层</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>按主题、按天轻度聚合</Text>
+            </Box>
+            <Text style={{ flex: 1, fontSize: 17, color: '#4A5568', lineHeight: 1.5 }}>
+                dws_order_1d / dws_user_1d / dws_category_1d / dws_channel_1d，均按 dt 分 366 个分区
+            </Text>
+            <Text style={{ width: 190, fontSize: 17, color: '#1A2230', textAlign: 'right' }}>4 张 · 5,124 行</Text>
+        </Box>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', height: 92, borderBottom: '1px solid #E5E7EB' }}>
+            <Text style={{ width: 100, fontSize: 24, fontWeight: 'bold', color: '#1E4FA8' }}>ADS</Text>
+            <Box style={{ width: 330, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>应用层</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', marginTop: 6 }}>一行一指标，前端零计算直读</Text>
+            </Box>
+            <Text style={{ flex: 1, fontSize: 17, color: '#4A5568', lineHeight: 1.5 }}>
+                总览 / 日趋势 / 品类 / 渠道 / 省份 / 用户分层 / 会员 / RFM 2 张 / 行为覆盖 / 履约漏斗 / 单品榜 / 门店坪效
+            </Text>
+            <Text style={{ width: 190, fontSize: 17, color: '#1A2230', textAlign: 'right' }}>13 张 · 2,061 行</Text>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 26 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                每层只解决一件事：ODS 不动数据、DWD 修数据、DWS 聚合数据、ADS 直接回答业务问题。跨层复用才算数仓，层层重算只是脚本集合。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>07 / 15</Text>
+    </Box>
+</Slide>

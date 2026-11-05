@@ -1,0 +1,332 @@
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tbl	sku_cnt	sales_sum	class_a_cnt	class_a_share
+ads_product_rank	600	3.7112620728E8	407	79.94
+
+
+
+
+
+
+
+
+rank_no	product_id	product_name	category	price_band	quantity	sales_amount	share_pct	cum_share_pct
+1	P00332	山地自行车	运动户外	500-2000	489	2175734.94	0.59	0.59
+2	P00390	旗舰智能手机 Pro	数码家电	2000以上	339	1893695.36	0.51	1.1
+3	P00155	深海三文鱼	食品生鲜	500-2000	329	1764015.55	0.48	1.57
+4	P00084	美白牙膏	美妆个护	500-2000	427	1739759.04	0.47	2.04
+5	P00131	故宫文创书签	图书文娱	500-2000	433	1718143.33	0.46	2.5
+6	P00181	精装文学名著	图书文娱	2000以上	308	1712857.57	0.46	2.97
+7	P00339	修身牛仔裤	服饰鞋包	2000以上	306	1674860.78	0.45	3.42
+8	P00206	无线降噪耳机	数码家电	500-2000	323	1628467.76	0.44	3.86
+9	P00208	儿童滑板车	母婴玩具	2000以上	347	1598139.71	0.43	4.29
+10	P00115	丝绒口红	美妆个护	100-500	338	1565363.74	0.42	4.71
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tbl	store_cnt	gmv_sum	min_eff	max_eff
+ads_store_efficiency	60	2.564346277E7	489.63	4139.7
+
+
+
+
+ads_store_efficiency.rank_no	ads_store_efficiency.store_id	ads_store_efficiency.store_name	ads_store_efficiency.city	ads_store_efficiency.area	ads_store_efficiency.open_date	ads_store_efficiency.order_cnt	ads_store_efficiency.gmv	ads_store_efficiency.aov	ads_store_efficiency.gmv_per_sqm	ads_store_efficiency.gmv_share	ads_store_efficiency.efficiency_level
+1	S029	云购生活·北京二店	北京	128.0	2023-03-31	202	529882.16	2623.18	4139.7	2.07	高效(前25%)
+2	S025	云购生活·苏州旗舰店	苏州	128.0	2023-08-03	176	505677.53	2873.17	3950.61	1.97	高效(前25%)
+3	S052	云购生活·武汉购物中心店	武汉	121.0	2023-10-30	168	421586.88	2509.45	3484.19	1.64	高效(前25%)
+4	S009	云购生活·莆田旗舰店	莆田	147.0	2023-12-11	189	503580.51	2664.45	3425.72	1.96	高效(前25%)
+5	S045	云购生活·苏州购物中心店	苏州	123.0	2023-02-19	162	401335.81	2477.38	3262.89	1.57	高效(前25%)
+
+
+
+
+
+
+
+
+tbl	cnt
+ads_store_efficiency	60
+ads_product_rank	600
+
+
+
+
+
+
+
+
+metric	val
+门店GMV合计	2.564346277E7
+ADS总览_GMV	2.564346277E7
+
+
+[WARN] Failed to create directory: /home/hive/.beeline
+No such file or directory

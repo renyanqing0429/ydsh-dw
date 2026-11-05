@@ -1,0 +1,75 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>经营 KPI 与品类结构</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>03 · Exploratory Analysis</Text>
+    </Box>
+    <Box style={{ padding: '26px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row' }}>
+            <Box style={{ width: 400, flexDirection: 'column', paddingRight: 40 }}>
+                <Box style={{ flexDirection: 'column', borderBottom: '1px solid #E5E7EB', paddingBottom: 14 }}>
+                    <Text style={{ fontSize: 15, color: '#8B97A8' }}>GMV（有效订单口径）</Text>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 6 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>2,564.35</Text>
+                        <Text style={{ fontSize: 17, color: '#4A5568', marginLeft: 6, marginBottom: 4 }}>万元</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'column', borderBottom: '1px solid #E5E7EB', paddingTop: 16, paddingBottom: 14 }}>
+                    <Text style={{ fontSize: 15, color: '#8B97A8' }}>客单价</Text>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 6 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>2,573.09</Text>
+                        <Text style={{ fontSize: 17, color: '#4A5568', marginLeft: 6, marginBottom: 4 }}>元</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'column', borderBottom: '1px solid #E5E7EB', paddingTop: 16, paddingBottom: 14 }}>
+                    <Text style={{ fontSize: 15, color: '#8B97A8' }}>有效订单率</Text>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 6 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#D9534F', lineHeight: 1 }}>66.44</Text>
+                        <Text style={{ fontSize: 17, color: '#D9534F', marginLeft: 4, marginBottom: 4 }}>%</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'column', paddingTop: 16 }}>
+                    <Text style={{ fontSize: 15, color: '#8B97A8' }}>ARPU（全周期去重 1,000 人）</Text>
+                    <Box style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 6 }}>
+                        <Text style={{ fontSize: 44, fontWeight: 'bold', color: '#1A2230', lineHeight: 1 }}>25,643.46</Text>
+                        <Text style={{ fontSize: 17, color: '#4A5568', marginLeft: 6, marginBottom: 4 }}>元</Text>
+                    </Box>
+                </Box>
+            </Box>
+            <Box style={{ flex: 1, flexDirection: 'column', paddingLeft: 40, borderLeft: '1px solid #E5E7EB' }}>
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#1A2230' }}>八个一级类目销售额占比（%）</Text>
+                <Box style={{ height: 360, marginTop: 10 }}>
+                    <Chart
+                        style={{ width: '100%', height: '100%' }}
+                        chartType='barChart'
+                        barDirection='bar'
+                        colors={['#1E4FA8']}
+                        showLegend={false}
+                        showDataLabels={true}
+                        axisColor='#8B97A8'
+                        dataLabelColor='#1A2230'
+                        data={[
+                            ['品类', '销售额占比'],
+                            ['运动户外', 14.99],
+                            ['数码家电', 14.12],
+                            ['服饰鞋包', 13.02],
+                            ['食品生鲜', 12.57],
+                            ['图书文娱', 11.97],
+                            ['家居生活', 11.68],
+                            ['美妆个护', 10.86],
+                            ['母婴玩具', 10.80],
+                        ]}
+                    />
+                </Box>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 18 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                八个类目各占 10.8%~15%，前 3 类合计 42.13% —— 结构高度分散，没有单极爆款，适合做组合推荐而不是押单品。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>11 / 15</Text>
+    </Box>
+</Slide>

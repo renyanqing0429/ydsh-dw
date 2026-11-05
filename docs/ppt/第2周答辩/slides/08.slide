@@ -1,0 +1,84 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 0 }}>
+    <Box style={{ width: 1280, height: 64, background: '#1E4FA8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 60, paddingRight: 60 }}>
+        <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>DWD 星型模型与存储策略</Text>
+        <Text style={{ fontSize: 15, color: '#BFD3F0' }}>02 · Data Warehouse</Text>
+    </Box>
+    <Box style={{ padding: '30px 60px 0 60px', flexDirection: 'column' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Box style={{ width: 360, flexDirection: 'column', gap: 26 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Box style={{ width: 300, border: '1px solid #D6DCE5', padding: '12px 16px', flexDirection: 'column' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1A2230' }}>dim_user</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>1,000 行 · 主键 user_id</Text>
+                    </Box>
+                    <Box style={{ width: 60, height: 1, background: '#D6DCE5' }} />
+                </Box>
+                <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Box style={{ width: 300, border: '1px solid #D6DCE5', padding: '12px 16px', flexDirection: 'column' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1A2230' }}>dim_store</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>60 行 · 主键 store_id</Text>
+                    </Box>
+                    <Box style={{ width: 60, height: 1, background: '#D6DCE5' }} />
+                </Box>
+            </Box>
+            <Box style={{ width: 260, background: '#E8EFF8', borderTop: '3px solid #1E4FA8', padding: '16px 18px', flexDirection: 'column' }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#1E4FA8' }}>dwd_order</Text>
+                <Text style={{ fontSize: 16, color: '#1A2230', marginTop: 8 }}>订单事实表</Text>
+                <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 10, lineHeight: 1.6 }}>
+                    15,000 行 · 订单粒度
+                    <br />
+                    pay_amount_valid / discount_amount_valid
+                    <br />
+                    is_valid_order / is_amount_fixed
+                </Text>
+            </Box>
+            <Box style={{ width: 360, flexDirection: 'column', gap: 26 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Box style={{ width: 60, height: 1, background: '#D6DCE5' }} />
+                    <Box style={{ width: 300, border: '1px solid #D6DCE5', padding: '12px 16px', flexDirection: 'column' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1A2230' }}>dim_product</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>600 行 · 主键 product_id</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Box style={{ width: 60, height: 1, background: '#D6DCE5' }} />
+                    <Box style={{ width: 300, border: '1px solid #D6DCE5', padding: '12px 16px', flexDirection: 'column' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#1A2230' }}>dim_date</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', marginTop: 6 }}>366 行 · 主键 date_id</Text>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
+        <Box style={{ flexDirection: 'row', marginTop: 30, borderTop: '1px solid #E5E7EB', paddingTop: 24 }}>
+            <Box style={{ flex: 1, flexDirection: 'column', paddingRight: 24 }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>明细事实表</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>
+                    dwd_order_item 37,549 行，含 product_id —— 品类与单品分析必须走这张表，订单表里没有商品维度。
+                </Text>
+            </Box>
+            <Box style={{ width: 1, background: '#E5E7EB', marginRight: 24 }} />
+            <Box style={{ flex: 1, flexDirection: 'column', paddingRight: 24 }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>行为事实表</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>
+                    dwd_user_behavior 60,000 行、92 个日期分区；另建 8 桶版本 dwd_user_behavior_bucket 演示分桶。
+                </Text>
+            </Box>
+            <Box style={{ width: 1, background: '#E5E7EB', marginRight: 24 }} />
+            <Box style={{ flex: 1, flexDirection: 'column' }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>存储与分区</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.6, marginTop: 8 }}>
+                    全表 ORC + 压缩；订单按 order_date 分 366 个分区，Q1 查询只扫 90 个分区。
+                </Text>
+            </Box>
+        </Box>
+        <Box style={{ background: '#E8EFF8', padding: '14px 20px', marginTop: 28 }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                建模要点：度量进事实表、描述属性进维度表；品类分析必须走明细事实表，因为订单事实表里没有 product_id。
+            </Text>
+        </Box>
+    </Box>
+    <Box style={{ height: 20, marginTop: 22, marginBottom: 30, paddingLeft: 60, paddingRight: 60, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>云购生活新零售企业数仓 · 第 2 周阶段答辩</Text>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>08 / 15</Text>
+    </Box>
+</Slide>
