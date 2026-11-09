@@ -1,0 +1,10 @@
+ads_user_order_freq.user_id	ads_user_order_freq.valid_order_cnt	ads_user_order_freq.gmv	ads_user_order_freq.first_order_date	ads_user_order_freq.last_order_date	ads_user_order_freq.is_repeat_buyer
+NULL	10	28191.41	2024-01-29	2024-11-22	1
+NULL	15	36012.53	2024-01-19	2024-12-27	1
+NULL	5	20953.91	2024-02-14	2024-12-27	1
+NULL	13	31484.61	2024-01-04	2024-12-13	1
+NULL	15	38191.71	2024-01-10	2024-12-17	1
+_c0	_c1
+1000	1000
+[WARN] Failed to create directory: /home/hive/.beeline
+No such file or directory
