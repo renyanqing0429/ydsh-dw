@@ -19,6 +19,8 @@
 
 ## 二、冲突现场（真实记录）
 
+**分支A补充（feature/sql-review）**：冲突解决时建议用 git diff --check 检查残留冲突标记。
+
 冲突文件：`docs/Git协同实战记录.md` 的「Code Review 记录」小节。
 两个分支对同一行做了不同的增改，合并时 Git 输出冲突标记：
 
